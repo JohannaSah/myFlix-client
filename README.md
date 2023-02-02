@@ -1,11 +1,11 @@
 # myFlix-client
-## myFlix-client
 
-# Objective
+
+## Objective
 
 Build a movie client-side app with React as Front-End and using a REST API as Back-End.
 
-# The 5 W's
+## The 5 W's
 
 Who — The users of your movie application. They will be movie enthusiasts who enjoy reading information about different movies
 What — A single-page, responsive application with routing, rich interactions, several interface views, and a polished user experience. The client-side development in this project supports the existing server-side code (REST API and database) by facilitating user requests and rendering the response from the server-side via several different interface views
@@ -14,13 +14,13 @@ Where — The application is hosted online. The Movie application itself is resp
 Why — Movie enthusiasts should be able to access information about different movies, directors, and genres, whenever they want to. Having the ability to save lists of favorite movies will ensure users always have access to the films they want to watch or recommend to their peers.
 
 
-# To be built with
+## To be built with
 
 - React
 - Redux
 - React Bootstrap
 
-# Features
+## Features
 
 - Return a list of ALL movies to the user
 - Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
@@ -33,7 +33,7 @@ Why — Movie enthusiasts should be able to access information about different m
 - Allow existing users to deregister
 - JWT token-based users authentication
 
-# Views
+## Views
 
 - Main view
 
