@@ -1,11 +1,11 @@
 # myFlix-client
 ## myFlix-client
 
-#Objective
+# Objective
 
 Build a movie client-side app with React as Front-End and using a REST API as Back-End.
 
-#The 5 W's
+# The 5 W's
 
 Who — The users of your movie application. They will be movie enthusiasts who enjoy reading information about different movies
 What — A single-page, responsive application with routing, rich interactions, several interface views, and a polished user experience. The client-side development in this project supports the existing server-side code (REST API and database) by facilitating user requests and rendering the response from the server-side via several different interface views
@@ -16,24 +16,24 @@ Why — Movie enthusiasts should be able to access information about different m
 
 # To be built with
 
-React
-Redux
-React Bootstrap
+- React
+- Redux
+- React Bootstrap
 
-#Features
+# Features
 
-Return a list of ALL movies to the user
-Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
-Return data about a genre (description) by name/title (e.g., “Thriller”)
-Return data about a director (bio, birth year, death year) by name
-Allow new users to register
-Allow users to update their user info (username, password, email, date of birth)
-Allow users to add a movie to their list of favorites
-Allow users to remove a movie from their list of favorites
-Allow existing users to deregister
-JWT token-based users authentication
+- Return a list of ALL movies to the user
+- Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
+- Return data about a genre (description) by name/title (e.g., “Thriller”)
+- Return data about a director (bio, birth year, death year) by name
+- Allow new users to register
+- Allow users to update their user info (username, password, email, date of birth)
+- Allow users to add a movie to their list of favorites
+- Allow users to remove a movie from their list of favorites
+- Allow existing users to deregister
+- JWT token-based users authentication
 
-#Views
+# Views
 
 - Main view
 
