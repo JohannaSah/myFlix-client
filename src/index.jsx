@@ -1,6 +1,7 @@
 
 import { createRoot } from 'react-dom/client';
 import { MainView } from './components/main-view/main-view';
+import React from 'react';
 
 // Import tatement to indicate that 'index.scss' needs to be bundled
 import "./index.scss";
