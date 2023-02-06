@@ -8,10 +8,19 @@ export const LoginView = ({onLoggedIn}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const date = {
+        const data = {
             access: username,
             secret: password
         };
+
+        if (data.user) {
+            localStorage.setItem("user". JSON.stringify(data.user));
+            localStorage.setItem("token", data.token);
+            onLoggedIn(data.user, data.token);
+        }
+        else {
+            alert("No such user");
+        }
 
         fetch("https://movieapi-dcj2.onrender.com/login", {
             method: "POST",
@@ -21,7 +30,7 @@ export const LoginView = ({onLoggedIn}) => {
             body: JSON.stringify(data)
         })
             .then((response) => response.json())
-            .then((date) => {
+            .then((data) => {
                 console.log("Login response: ", data);
                 if(data.user) {
                     onLoggedIn(data.user, data.tokem);
