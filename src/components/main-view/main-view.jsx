@@ -20,7 +20,7 @@ export const MainView = () => {
             genre: doc.Genre.Name
           };
         });
-      };
+      });
     });
 
     const [selectedMovie, setSelectedMovie] = useState(null);
