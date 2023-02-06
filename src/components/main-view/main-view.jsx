@@ -10,14 +10,14 @@ export const MainView = () => {
       fetch("https://movieapi-dcj2.onrender.com/movies")
       .then((response) => response.json())
       .then((data) => {
-        const moviesFromApi = data.map((doc) => {
+        const moviesFromApi = movie.map((movie) => {
           return {
-            id: doc._id,
-            title: doc.Title,
-            director: doc.Director.Name,
-            description: doc.Description,
-            image: doc.imageUrl,
-            genre: doc.Genre.Name
+            id: movie._id,
+            title: movie.Title,
+            director: movie.Director.Name,
+            description: movie.Description,
+            image: movie.imageUrl,
+            genre: movie.Genre.Name
           };
         });
 
