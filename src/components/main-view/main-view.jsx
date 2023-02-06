@@ -20,6 +20,8 @@ export const MainView = () => {
             genre: doc.Genre.Name
           };
         });
+      };
+    });
 
     const [selectedMovie, setSelectedMovie] = useState(null);
 
@@ -83,4 +85,4 @@ export const MainView = () => {
         </button>
       </div>
     );
-};
+  }
