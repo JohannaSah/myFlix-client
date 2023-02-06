@@ -29,24 +29,28 @@ export const MainView = () => {
           movie={selectedMovie} 
           onBackClick={() => setSelectedMovie(null)} />
       );
-  }
+    }
 
-  if (movies.length === 0) {
-      return <div className="main-view"> The list empty! </div>;
-  }
-    const [token, setToken] = useState(null);
+    if (movies.length === 0) {
+        return <div className="main-view"> The list empty! </div>;
+    }
+
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
+    const [user, setUser] = useState(storedUser? storedUser : null);
+    const [token, setToken] = useState(storedToken? storedToken: null);
 
     useEffect(() => {
       if (!token) {
         return;
       }
 
-      fetch("https://movieapi-dcj2.onrender.com/", {
+      fetch("https://movieapi-dcj2.onrender.com/movies", {
         headers: { Authorization: 'Bearer ${token}'}
       })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then((movies) => {
+        setMovies(movies);
       });
     }, [token]);
 
@@ -74,7 +78,7 @@ export const MainView = () => {
                 />
             ))}
         </div>
-        <button onClick={() => {setUser(null); setToken(null); }}>
+        <button onClick={() => {setUser(null); setToken(null); localStorage.clear(); }}>
           Log out
         </button>
       </div>
