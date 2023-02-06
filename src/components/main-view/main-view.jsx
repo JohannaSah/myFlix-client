@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -90,6 +90,20 @@ export const MainView = () => {
 
     const [token, setToken] = useState(null);
 
+    useEffect(() => {
+      if (!token) {
+        return;
+      }
+
+      fetch("https://movieapi-dcj2.onrender.com/", {
+        headers: { Authorization: 'Bearer ${token}'}
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+    }, [token]);
+
     if (!user) {
       return (
         <LoginView
@@ -124,7 +138,7 @@ export const MainView = () => {
                 />
             ))}
         </div>
-        <button onClick={() => {setUser(null);}}>
+        <button onClick={() => {setUser(null); setToken(null); }}>
           Log out
         </button>
       </div>
