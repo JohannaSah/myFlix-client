@@ -13,17 +13,26 @@ export const LoginView = ({onLoggedIn}) => {
             secret: password
         };
 
-        fetch("https://openlibrary.org/account/login.json", {
+        fetch("https://movieapi-dcj2.onrender.com/login", {
             method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
             body: JSON.stringify(data)
-        }).then((response) => {
-            if (response.ok) {
-                onLoggedIn(username);
-            }
-            else {
-                alert("Login failed");
-            }
-        });
+        })
+            .then((response) => response.json())
+            .then((date) => {
+                console.log("Login response: ", data);
+                if(data.user) {
+                    onLoggedIn(data.user, data.tokem);
+                }
+                else {
+                    alert("No such user");
+                }
+            })
+            .catch((e) => {
+                alert("Something went wrong");
+            });
     };
 
     return (
