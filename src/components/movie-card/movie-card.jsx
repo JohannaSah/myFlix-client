@@ -1,11 +1,11 @@
-export const MovieCard = ({movie, onMovieClick}) => {
-    return (
-        <div 
-            onClick={() => {
-                onMovieClick(movie);
-            }}
-        >
-            {movie.title}
+import React from "react";
+
+export class MovieCard extends React.Component {
+    render() {
+        const { movie, onMovieCLick } = this.props;
+
+        return <div className="movie-card" onClick={() => {onMovieCLick(movie);}}>
+            {movie.Title}
         </div>
-    );
-};
+    }
+}
