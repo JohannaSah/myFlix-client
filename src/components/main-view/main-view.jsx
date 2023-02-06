@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
+
 
 export const MainView = () => {
     const [movies, setMovies] = useState([
@@ -98,6 +100,7 @@ export const MainView = () => {
     }
 
     return (
+      <div>
         <div>
             {movies.map((movie) => (
                 <MovieCard
@@ -109,5 +112,9 @@ export const MainView = () => {
                 />
             ))}
         </div>
+        <button onClick={() => {setUser(null);}}>
+          Log out
+        </button>
+      </div>
     );
 };
