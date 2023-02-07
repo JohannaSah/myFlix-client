@@ -30170,8 +30170,14 @@ var MainView = function MainView() {
     if (!token) {
       return;
     }
-    fetch("https://movieapi-dcj2.onrender.com/movies").then(function (response) {
+    fetch("https://movieapi-dcj2.onrender.com/movies", {
+      headers: {
+        Authorization: 'Bearer ${token}'
+      }
+    }).then(function (response) {
       return response.json();
+    }).then(function (movies) {
+      setMovies(movies);
     }).then(function (movie) {
       var moviesFromApi = movie.map(function (movie) {
         return {
@@ -30182,25 +30188,11 @@ var MainView = function MainView() {
           image: movie.imageUrl,
           genre: movie.Genre.Name
         };
-      });
+      }, [token]);
       setMovies(moviesFromApi);
       console.log('movies from Api:', data);
     });
   }, []);
-  (0, _react.useEffect)(function () {
-    if (!token) {
-      return;
-    }
-    fetch("https://movieapi-dcj2.onrender.com/movies", {
-      headers: {
-        Authorization: 'Bearer ${token}'
-      }
-    }).then(function (response) {
-      return response.json();
-    }).then(function (movies) {
-      setMovies(movies);
-    });
-  }, [token]);
   if (selectedMovie) {
     return /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
       movie: selectedMovie,

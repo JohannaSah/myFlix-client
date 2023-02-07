@@ -19,8 +19,13 @@ export const MainView = () => {
         return;
       }
 
-      fetch("https://movieapi-dcj2.onrender.com/movies")
+      fetch("https://movieapi-dcj2.onrender.com/movies", {
+        headers: { Authorization: 'Bearer ${token}'}
+      })
       .then((response) => response.json())
+      .then((movies) => {
+        setMovies(movies);
+      })
       .then((movie) => {
         const moviesFromApi = movie.map((movie) => {
           return {
@@ -31,26 +36,12 @@ export const MainView = () => {
             image: movie.imageUrl,
             genre: movie.Genre.Name
           };
-        });
+        }, [token]);
 
         setMovies(moviesFromApi);
         console.log('movies from Api:', data);
       });
     }, []);
-
-    useEffect(() => {
-      if (!token) {
-        return;
-      }
-
-      fetch("https://movieapi-dcj2.onrender.com/movies", {
-        headers: { Authorization: 'Bearer ${token}'}
-      })
-      .then((response) => response.json())
-      .then((movies) => {
-        setMovies(movies);
-      });
-    }, [token]);
 
     if (selectedMovie) {
         return (
