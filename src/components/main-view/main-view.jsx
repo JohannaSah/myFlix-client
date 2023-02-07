@@ -23,25 +23,10 @@ export const MainView = () => {
       })
       .then((response) => response.json())
       .then((movies) => {
-        console.log{movies};
+        console.log(movies);
         setMovies(movies);
-      })
-      .then((movie) => {
-        const moviesFromApi = movie.map((movie) => {
-          return {
-            id: movie._id,
-            title: movie.Title,
-            director: movie.Director.Name,
-            description: movie.Description,
-            image: movie.imageUrl,
-            genre: movie.Genre.Name
-          };
-        }, [token]);
-
-        setMovies(moviesFromApi);
-        console.log('movies from Api:', data);
       });
-    }, []);
+    }, [token]);
 
     if (selectedMovie) {
         return (

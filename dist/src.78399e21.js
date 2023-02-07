@@ -30047,7 +30047,7 @@ var SignupView = function SignupView() {
     setUsername = _useState2[1];
   var _useState3 = (0, _react.useState)(""),
     _useState4 = _slicedToArray(_useState3, 2),
-    passwor = _useState4[0],
+    password = _useState4[0],
     setPassword = _useState4[1];
   var _useState5 = (0, _react.useState)(""),
     _useState6 = _slicedToArray(_useState5, 2),
@@ -30065,7 +30065,7 @@ var SignupView = function SignupView() {
       Email: email,
       Birthday: birthday
     };
-    fetch("https://movieapi-dcj2.onrender.com/", {
+    fetch("SIGNUP_URL", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -30177,23 +30177,10 @@ var MainView = function MainView() {
     }).then(function (response) {
       return response.json();
     }).then(function (movies) {
-      console.log;
+      console.log(movies);
       setMovies(movies);
-    }).then(function (movie) {
-      var moviesFromApi = movie.map(function (movie) {
-        return {
-          id: movie._id,
-          title: movie.Title,
-          director: movie.Director.Name,
-          description: movie.Description,
-          image: movie.imageUrl,
-          genre: movie.Genre.Name
-        };
-      }, [token]);
-      setMovies(moviesFromApi);
-      console.log('movies from Api:', data);
     });
-  }, []);
+  }, [token]);
   if (selectedMovie) {
     return /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
       movie: selectedMovie,
@@ -30337,7 +30324,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63220" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63725" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
