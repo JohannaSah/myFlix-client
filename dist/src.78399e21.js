@@ -30006,7 +30006,7 @@ var LoginView = function LoginView(_ref) {
     minLength: "5",
     required: true
   })), /*#__PURE__*/_react.default.createElement("label", null, "Password:", /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
+    type: "password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
@@ -30067,7 +30067,7 @@ var SignupView = function SignupView() {
       email: email,
       birthday: birthday
     };
-    fetch("SIGNUP_URL", {
+    fetch("https://movieapi-dcj2.onrender.com/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -30332,7 +30332,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62680" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63176" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
