@@ -7,27 +7,42 @@ export class MovieView extends React.Component {
         
         return (
             <div className="movie-view">
-                <div className="movie-poster">
+                <div className="movie-image">
                     <img src="movie.imageUrl" alt="" />
                 </div>
                 <div className="movie-title">
                     <span> Title: </span>
-                    <span>{movie.Title}</span>
+                    <span>{movie.title}</span>
                 </div>
                 <div className="movie-director">
                     <span> Director: </span>
-                    <span>{movie.Director.Name}</span>
+                    <span>{movie.director.name}</span>
                 </div>
                 <div className="movie-genre">
                     <span> Genre: </span>
-                    <span>{movie.Genre.Name}</span>
+                    <span>{movie.genre.name}</span>
                 </div>
                 <div className="movie-description">
                     <span> Description: </span>
-                    <span>{movie.Description}</span>
+                    <span>{movie.description}</span>
                 </div>
                 <button onClick={() => { onBackClick(null); }}>Back</button>
             </div>
         );
     }
 }
+
+MovieView.propTypes = {
+    movie: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      genre: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired
+      }),
+      director: PropTypes.shape({
+        name: PropTypes.string.isRequired
+      }),
+      imageUrl: PropTypes.string.isRequired
+    }).isRequired,
+  };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -10,28 +10,31 @@ export const MainView = () => {
     useEffect(() => {
       fetch("https://movieapi-dcj2.onrender.com/movies")
       .then((response) => response.json())
-      .then((data) => {
-        const moviesFromApi = data.map((doc) => {
+      .then((movie) => {
+        const moviesFromApi = movie.map((movie) => {
           return {
-            id: doc._id,
-            title: doc.Title,
-            director: doc.Director.Name,
-            description: doc.Description,
-            image: doc.imageUrl,
-            genre: doc.Genre.Name
+            id: movie._id,
+            title: movie.Title,
+            director: movie.Director.Name,
+            description: movie.Description,
+            image: movie.imageUrl,
+            genre: movie.Genre.Name
           };
         });
-      });
-    });
 
+        setMovies(moviesFromApi);
+        console.log('movies from Api:', data);
+      });
+    }, []);
+    
     const [selectedMovie, setSelectedMovie] = useState(null);
 
     if (selectedMovie) {
-      return (
-          <MovieView 
-          movie={selectedMovie} 
-          onBackClick={() => setSelectedMovie(null)} />
-      );
+        return (
+            <MovieView 
+            movie={selectedMovie} 
+            onBackClick={() => setSelectedMovie(null)} />
+        );
     }
 
     if (movies.length === 0) {
@@ -74,7 +77,7 @@ export const MainView = () => {
 
     return (
       <div className="main-view">
-        <div className="movie-dsiplay">
+        <div className="movie-display">
             {movies.map((movie) => (
                 <MovieCard
                     key={movie._id}
