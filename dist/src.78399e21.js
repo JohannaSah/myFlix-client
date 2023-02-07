@@ -30182,12 +30182,18 @@ var MainView = function MainView() {
     });
   }, [token]);
   if (selectedMovie) {
-    return /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("button", {
+      onClick: function onClick() {
+        setUser(null);
+        setToken(null);
+        localStorage.clear();
+      }
+    }, "Logout"), /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
       movie: selectedMovie,
       onBackClick: function onBackClick() {
         return setSelectedMovie(null);
       }
-    });
+    }));
   }
   if (!user) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_loginView.LoginView, {
