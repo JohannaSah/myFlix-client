@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 export const LoginView = ({onLoggedIn}) => {
     const [username, setUsername] = useState("");
@@ -8,18 +9,9 @@ export const LoginView = ({onLoggedIn}) => {
         event.preventDefault();
 
         const data = {
-            Username: username,
-            Password: password
+            access: username,
+            secret: password
         };
-
-        if (data.user) {
-            localStorage.setItem("user". JSON.stringify(data.user));
-            localStorage.setItem("token", data.token);
-            onLoggedIn(data.user, data.token);
-        }
-        else {
-            alert("No such user");
-        }
 
         fetch("https://movieapi-dcj2.onrender.com/login", {
             method: "POST",
@@ -32,7 +24,9 @@ export const LoginView = ({onLoggedIn}) => {
             .then((data) => {
                 console.log("Login response: ", data);
                 if(data.user) {
-                    onLoggedIn(data.user, data.tokem);
+                    localStorage.setItem("user". JSON.stringify(data.user));
+                    localStorage.setItem("token", data.token);
+                    onLoggedIn(data.user, data.token);
                 }
                 else {
                     alert("No such user");
@@ -70,3 +64,13 @@ export const LoginView = ({onLoggedIn}) => {
         </form>
     );
 };
+
+LoginView.propTypes = {
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+      password: PropTypes.string.isRequired,
+    }),
+    onLoggedIn: PropTypes.func.isRequired,
+  };
+  
+  export default LoginView;
