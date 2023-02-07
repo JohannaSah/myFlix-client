@@ -18,12 +18,12 @@ export const MainView = () => {
       if (!token) {
         return;
       }
-
       fetch("https://movieapi-dcj2.onrender.com/movies", {
         headers: { Authorization: 'Bearer ${token}'}
       })
       .then((response) => response.json())
       .then((movies) => {
+        console.log{movies};
         setMovies(movies);
       })
       .then((movie) => {

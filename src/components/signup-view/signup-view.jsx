@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
-    const [passwor, setPassword] = useState("");
+    const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [birthday, setBirthday] = useState("");
 
@@ -16,7 +16,7 @@ export const SignupView = () => {
             Birthday: birthday
         };
 
-        fetch("https://movieapi-dcj2.onrender.com/", {
+        fetch("SIGNUP_URL", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

@@ -30177,6 +30177,7 @@ var MainView = function MainView() {
     }).then(function (response) {
       return response.json();
     }).then(function (movies) {
+      console.log;
       setMovies(movies);
     }).then(function (movie) {
       var moviesFromApi = movie.map(function (movie) {
