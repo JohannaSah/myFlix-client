@@ -1,7 +1,7 @@
 import React from "react";
 
 export const MovieCard = ({movie, onMovieClick}) => {
-    render() {
+    render(); {
         const { movie, onMovieCLick } = this.props;
 
         return (
