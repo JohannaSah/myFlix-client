@@ -28889,125 +28889,7 @@ if ("development" === 'production') {
     }
   };
 }
-},{"react-dom":"../node_modules/react-dom/index.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.MovieCard = void 0;
-var _react = _interopRequireDefault(require("react"));
-var _this = void 0;
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var MovieCard = function MovieCard(_ref) {
-  var movie = _ref.movie,
-    onMovieClick = _ref.onMovieClick;
-  render();
-  {
-    var _this$props = _this.props,
-      _movie = _this$props.movie,
-      onMovieCLick = _this$props.onMovieCLick;
-    return /*#__PURE__*/_react.default.createElement("div", {
-      className: "movie-card",
-      onClick: function onClick() {
-        onMovieClick(_movie);
-      }
-    }, _movie.title);
-  }
-  ;
-};
-exports.MovieCard = MovieCard;
-MovieCard.PropTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    director: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    }),
-    description: PropTypes.string.isRequired,
-    imageUrl: PropTypes.string.isRequired,
-    genre: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })
-  }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
-};
-},{"react":"../node_modules/react/index.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.MovieView = void 0;
-var _react = _interopRequireDefault(require("react"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-var MovieView = /*#__PURE__*/function (_React$Component) {
-  _inherits(MovieView, _React$Component);
-  var _super = _createSuper(MovieView);
-  function MovieView() {
-    _classCallCheck(this, MovieView);
-    return _super.apply(this, arguments);
-  }
-  _createClass(MovieView, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-        movie = _this$props.movie,
-        onBackClick = _this$props.onBackClick;
-      return /*#__PURE__*/_react.default.createElement("div", {
-        className: "movie-view"
-      }, /*#__PURE__*/_react.default.createElement("div", {
-        className: "movie-image"
-      }, /*#__PURE__*/_react.default.createElement("img", {
-        src: "movie.imageUrl",
-        alt: "image",
-        width: "100px",
-        height: "100px"
-      })), /*#__PURE__*/_react.default.createElement("div", {
-        className: "movie-title"
-      }, /*#__PURE__*/_react.default.createElement("span", null, " Title: "), /*#__PURE__*/_react.default.createElement("span", null, movie.title)), /*#__PURE__*/_react.default.createElement("div", {
-        className: "movie-director"
-      }, /*#__PURE__*/_react.default.createElement("span", null, " Director: "), /*#__PURE__*/_react.default.createElement("span", null, movie.director.name)), /*#__PURE__*/_react.default.createElement("div", {
-        className: "movie-genre"
-      }, /*#__PURE__*/_react.default.createElement("span", null, " Genre: "), /*#__PURE__*/_react.default.createElement("span", null, movie.genre.name)), /*#__PURE__*/_react.default.createElement("div", {
-        className: "movie-description"
-      }, /*#__PURE__*/_react.default.createElement("span", null, " Description: "), /*#__PURE__*/_react.default.createElement("span", null, movie.description)), /*#__PURE__*/_react.default.createElement("button", {
-        onClick: function onClick() {
-          onBackClick(null);
-        }
-      }, "Back"));
-    }
-  }]);
-  return MovieView;
-}(_react.default.Component);
-exports.MovieView = MovieView;
-MovieView.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    genre: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired
-    }),
-    director: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    }),
-    imageUrl: PropTypes.string.isRequired
-  }).isRequired
-};
-},{"react":"../node_modules/react/index.js"}],"../node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
+},{"react-dom":"../node_modules/react-dom/index.js"}],"../node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
 /** @license React v16.13.1
  * react-is.development.js
  *
@@ -29938,7 +29820,127 @@ if ("development" !== 'production') {
   // http://fb.me/prop-types-in-prod
   module.exports = require('./factoryWithThrowingShims')();
 }
-},{"react-is":"../node_modules/react-is/index.js","./factoryWithTypeCheckers":"../node_modules/prop-types/factoryWithTypeCheckers.js"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
+},{"react-is":"../node_modules/react-is/index.js","./factoryWithTypeCheckers":"../node_modules/prop-types/factoryWithTypeCheckers.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MovieCard = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+var _this = void 0;
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var MovieCard = function MovieCard(_ref) {
+  var movie = _ref.movie,
+    onMovieClick = _ref.onMovieClick;
+  render();
+  {
+    var _this$props = _this.props,
+      _movie = _this$props.movie,
+      onMovieCLick = _this$props.onMovieCLick;
+    return /*#__PURE__*/_react.default.createElement("div", {
+      className: "movie-card",
+      onClick: function onClick() {
+        onMovieClick(_movie);
+      }
+    }, _movie.title);
+  }
+  ;
+};
+exports.MovieCard = MovieCard;
+MovieCard.propTypes = {
+  movie: _propTypes.default.shape({
+    title: _propTypes.default.string.isRequired,
+    director: _propTypes.default.shape({
+      name: _propTypes.default.string.isRequired
+    }),
+    description: _propTypes.default.string.isRequired,
+    imageUrl: _propTypes.default.string.isRequired,
+    genre: _propTypes.default.shape({
+      name: _propTypes.default.string.isRequired
+    })
+  }).isRequired,
+  onMovieClick: _propTypes.default.func.isRequired
+};
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MovieView = void 0;
+var _react = _interopRequireDefault(require("react"));
+var _propTypes = _interopRequireDefault(require("prop-types"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+var MovieView = /*#__PURE__*/function (_React$Component) {
+  _inherits(MovieView, _React$Component);
+  var _super = _createSuper(MovieView);
+  function MovieView() {
+    _classCallCheck(this, MovieView);
+    return _super.apply(this, arguments);
+  }
+  _createClass(MovieView, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+        movie = _this$props.movie,
+        onBackClick = _this$props.onBackClick;
+      return /*#__PURE__*/_react.default.createElement("div", {
+        className: "movie-view"
+      }, /*#__PURE__*/_react.default.createElement("div", {
+        className: "movie-image"
+      }, /*#__PURE__*/_react.default.createElement("img", {
+        src: "movie.imageUrl",
+        alt: "image",
+        width: "100px",
+        height: "100px"
+      })), /*#__PURE__*/_react.default.createElement("div", {
+        className: "movie-title"
+      }, /*#__PURE__*/_react.default.createElement("span", null, " Title: "), /*#__PURE__*/_react.default.createElement("span", null, movie.title)), /*#__PURE__*/_react.default.createElement("div", {
+        className: "movie-director"
+      }, /*#__PURE__*/_react.default.createElement("span", null, " Director: "), /*#__PURE__*/_react.default.createElement("span", null, movie.director.name)), /*#__PURE__*/_react.default.createElement("div", {
+        className: "movie-genre"
+      }, /*#__PURE__*/_react.default.createElement("span", null, " Genre: "), /*#__PURE__*/_react.default.createElement("span", null, movie.genre.name)), /*#__PURE__*/_react.default.createElement("div", {
+        className: "movie-description"
+      }, /*#__PURE__*/_react.default.createElement("span", null, " Description: "), /*#__PURE__*/_react.default.createElement("span", null, movie.description)), /*#__PURE__*/_react.default.createElement("button", {
+        onClick: function onClick() {
+          onBackClick(null);
+        }
+      }, "Back"));
+    }
+  }]);
+  return MovieView;
+}(_react.default.Component);
+exports.MovieView = MovieView;
+MovieView.propTypes = {
+  movie: _propTypes.default.shape({
+    title: _propTypes.default.string.isRequired,
+    description: _propTypes.default.string.isRequired,
+    genre: _propTypes.default.shape({
+      name: _propTypes.default.string.isRequired,
+      description: _propTypes.default.string.isRequired
+    }),
+    director: _propTypes.default.shape({
+      name: _propTypes.default.string.isRequired
+    }),
+    imageUrl: _propTypes.default.string.isRequired
+  }).isRequired
+};
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30060,10 +30062,10 @@ var SignupView = function SignupView() {
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     var data = {
-      Username: username,
-      Password: password,
-      Email: email,
-      Birthday: birthday
+      username: username,
+      password: password,
+      email: email,
+      birthday: birthday
     };
     fetch("SIGNUP_URL", {
       method: "POST",
@@ -30087,27 +30089,27 @@ var SignupView = function SignupView() {
   }, "Username:", /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     value: username,
-    onChange: function onChange(e) {
-      return setUsername(e.target.value);
+    onChange: function onChange(error) {
+      return setUsername(error.target.value);
     },
     required: true,
     minLength: "3"
   })), /*#__PURE__*/_react.default.createElement("label", {
     className: "signup-password"
   }, "Password:", /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
+    type: "password",
     value: password,
-    onChange: function onChange(e) {
-      return setPassword(e.target.value);
+    onChange: function onChange(error) {
+      return setPassword(error.target.value);
     },
     required: true
   })), /*#__PURE__*/_react.default.createElement("label", {
     className: "signup-email"
   }, "Email:", /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
+    type: "email",
     value: email,
-    onChange: function onChange(e) {
-      return setEmail(e.target.value);
+    onChange: function onChange(error) {
+      return setEmail(error.target.value);
     },
     required: true
   })), /*#__PURE__*/_react.default.createElement("label", {
@@ -30115,8 +30117,8 @@ var SignupView = function SignupView() {
   }, "Birthday:", /*#__PURE__*/_react.default.createElement("input", {
     type: "date",
     value: birthday,
-    onChange: function onChange(e) {
-      return setBirthday(e.target.value);
+    onChange: function onChange(error) {
+      return setBirthday(error.target.value);
     },
     required: true
   })), /*#__PURE__*/_react.default.createElement("button", {
@@ -30330,7 +30332,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63725" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62680" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

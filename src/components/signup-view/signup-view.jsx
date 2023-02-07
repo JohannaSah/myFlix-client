@@ -10,10 +10,10 @@ export const SignupView = () => {
         event.preventDefault();
 
         const data = {
-            Username: username,
-            Password: password,
-            Email: email,
-            Birthday: birthday
+            username: username,
+            password: password,
+            email: email,
+            birthday: birthday
         };
 
         fetch("SIGNUP_URL", {
@@ -39,7 +39,7 @@ export const SignupView = () => {
                     <input 
                         type="text" 
                         value={ username }
-                        onChange={(e) => setUsername(e.target.value)}
+                        onChange={(error) => setUsername(error.target.value)}
                         required
                         minLength="3"
                     />
@@ -47,18 +47,18 @@ export const SignupView = () => {
             <label className="signup-password">
                 Password: 
                     <input 
-                        type="text" 
+                        type="password" 
                         value={ password }
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(error) => setPassword(error.target.value)}
                         required
                     />
             </label>
             <label className="signup-email">
                 Email: 
                     <input 
-                        type="text"
+                        type="email"
                         value= { email }
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(error) => setEmail(error.target.value)}
                         required
                     />
             </label>
@@ -67,7 +67,7 @@ export const SignupView = () => {
                     <input 
                         type="date"
                         value={ birthday }
-                        onChange={(e) => setBirthday(e.target.value)}
+                        onChange={(error) => setBirthday(error.target.value)}
                         required
                     />
             </label>
