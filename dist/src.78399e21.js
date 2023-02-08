@@ -30074,7 +30074,9 @@ var SignupView = function SignupView() {
         "Content-Type": "application/json"
       }
     }).then(function (response) {
+      console.log(response);
       if (response.ok) {
+        console.log("Response is ok");
         alert("Signup successfull");
         window.location.reload();
       } else {
@@ -30332,7 +30334,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63176" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49710" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
