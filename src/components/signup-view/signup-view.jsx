@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Form, Button } from "react-bootstrap";
+
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
@@ -35,47 +37,73 @@ export const SignupView = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label className="signup-username">
-                Username:
-                    <input 
-                        type="text" 
-                        value={ username }
-                        onChange={(error) => setUsername(error.target.value)}
-                        required
-                        minLength="3"
-                    />
-            </label>
-            <label className="signup-password">
-                Password: 
-                    <input 
-                        type="password" 
-                        value={ password }
-                        onChange={(error) => setPassword(error.target.value)}
-                        required
-                    />
-            </label>
-            <label className="signup-email">
-                Email: 
-                    <input 
-                        type="email"
-                        value= { email }
-                        onChange={(error) => setEmail(error.target.value)}
-                        required
-                    />
-            </label>
-            <label className="signup-birthday">
-                Birthday:
-                    <input 
-                        type="date"
-                        value={ birthday }
-                        onChange={(error) => setBirthday(error.target.value)}
-                        required
-                    />
-            </label>
-            <button type="submit"> 
+        <Form onSubmit={handleSubmit}>
+            <Form.Group
+                controlId="formSignUpUsername"
+            >
+                <Form.Label>
+                    Username:
+                </Form.Label>
+                <Form.Control 
+                    placeholder="Enter a username"
+                    type="text" 
+                    value={ username }
+                    onChange={(error) => setUsername(error.target.value)}
+                    required
+                    minLength="3"
+                />
+                <Form.Text className="text-muted">
+                    min. 3 characters
+                </Form.Text>
+            </Form.Group>
+
+            <Form.Group
+                controlId="formSignupPassword"
+            >
+                <Form.Label>
+                    Password:
+                </Form.Label>
+                <Form.Control 
+                    placeholder="Enter a password"
+                    type="password" 
+                    value={ password }
+                    onChange={(error) => setPassword(error.target.value)}
+                    required
+                />
+            </Form.Group>
+
+            <Form.Group
+                controlId="formSignupEmail"
+            >
+                <Form.Label>
+                    Email:
+                </Form.Label>
+                <Form.Control 
+                    placeholder="Enter your email adress"
+                    type="email"
+                    value= { email }
+                    onChange={(error) => setEmail(error.target.value)}
+                    required
+                />
+            </Form.Group>
+
+            <Form.Group
+                controlId="formSignupBirthday"
+            >
+                <Form.Label>
+                    Birthday:
+                </Form.Label>
+                <Form.Control 
+                    type="date"
+                    value={ birthday }
+                    onChange={(error) => setBirthday(error.target.value)}
+                    required
+                />
+            </Form.Group>
+
+            <Button type="submit" variant="primary"> 
                 Submit
-            </button>
-        </form>
+            </Button>
+        </Form>
     );
 };
