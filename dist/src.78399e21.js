@@ -45810,6 +45810,7 @@ var MovieCard = function MovieCard(_ref) {
   var movie = _ref.movie,
     onMovieClick = _ref.onMovieClick;
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
+    className: "h-100",
     onClick: function onClick() {
       onMovieClick(movie);
     }
@@ -45906,7 +45907,7 @@ require("./movie-view.scss");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var MovieView = function MovieView(_ref) {
   var movie = _ref.movie,
-    onMovieClick = _ref.onMovieClick;
+    onBackClick = _ref.onBackClick;
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "movie-view"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -45914,8 +45915,7 @@ var MovieView = function MovieView(_ref) {
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: movie.imageUrl,
     alt: "image",
-    width: "200px",
-    height: ""
+    className: "w-100"
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "movie-title"
   }, /*#__PURE__*/_react.default.createElement("span", null, " Title: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Title)), /*#__PURE__*/_react.default.createElement("div", {
@@ -45958,8 +45958,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = exports.LoginView = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
-var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
-var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+var _reactBootstrap = require("react-bootstrap");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -46007,11 +46006,12 @@ var LoginView = function LoginView(_ref) {
       alert("Something went wrong");
     });
   };
-  return /*#__PURE__*/_react.default.createElement(_Form.default, {
+  return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
     onSubmit: handleSubmit
-  }, /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formLoginUsername"
-  }, /*#__PURE__*/_react.default.createElement(_Form.default.Label, null, "Username:"), /*#__PURE__*/_react.default.createElement(_Form.default.Control, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Username:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+    placeholder: "Enter your username",
     type: "text",
     value: username,
     onChange: function onChange(e) {
@@ -46019,16 +46019,17 @@ var LoginView = function LoginView(_ref) {
     },
     minLength: "3",
     required: true
-  })), /*#__PURE__*/_react.default.createElement(_Form.default.Group, {
+  })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formLoginPassword"
-  }, /*#__PURE__*/_react.default.createElement(_Form.default.Label, null, "Password:"), /*#__PURE__*/_react.default.createElement(_Form.default.Control, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Password:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+    placeholder: "Enter your password",
     type: "password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     },
     required: true
-  })), /*#__PURE__*/_react.default.createElement(_Button.default, {
+  })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     variant: "primary",
     type: "submit"
   }, "Submit"));
@@ -46043,7 +46044,7 @@ LoginView.propTypes = {
 };
 var _default = LoginView;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js"}],"components/signup-view/signup-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/signup-view/signup-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -46107,6 +46108,7 @@ var SignupView = function SignupView() {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formSignUpUsername"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Username:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+    placeholder: "Enter a username",
     type: "text",
     value: username,
     onChange: function onChange(error) {
@@ -46114,9 +46116,12 @@ var SignupView = function SignupView() {
     },
     required: true,
     minLength: "3"
-  })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
+  }), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Text, {
+    className: "text-muted"
+  }, "min. 3 characters")), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formSignupPassword"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Password:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+    placeholder: "Enter a password",
     type: "password",
     value: password,
     onChange: function onChange(error) {
@@ -46126,6 +46131,7 @@ var SignupView = function SignupView() {
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formSignupEmail"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Email:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+    placeholder: "Enter your email adress",
     type: "email",
     value: email,
     onChange: function onChange(error) {
@@ -46159,6 +46165,7 @@ var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
 var _signupView = require("../signup-view/signup-view");
+var _reactBootstrap = require("react-bootstrap");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -46204,61 +46211,55 @@ var MainView = function MainView() {
       setMovies(movies);
     });
   }, [token]);
-  if (selectedMovie) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("button", {
-      onClick: function onClick() {
-        setUser(null);
-        setToken(null);
-        localStorage.clear();
-      }
-    }, "Logout"), /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
-      movie: selectedMovie,
-      onBackClick: function onBackClick() {
-        return setSelectedMovie(null);
-      }
-    }));
-  }
-  if (!user) {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_loginView.LoginView, {
-      onLoggedIn: function onLoggedIn(user, token) {
-        setUser(user);
-        setToken(token);
-      }
-    }), "or", /*#__PURE__*/_react.default.createElement(_signupView.SignupView, null));
-  }
-  if (movies.length === 0) {
-    return /*#__PURE__*/_react.default.createElement("div", {
-      className: "main-view"
-    }, " The list empty! ");
-  }
-  return /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "justify-content-md-center"
+  }, !user ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    md: 5
+  }, /*#__PURE__*/_react.default.createElement(_loginView.LoginView, {
+    onLoggedIn: function onLoggedIn(user, token) {
+      setUser(user);
+      setToken(token);
+    }
+  }), "or", /*#__PURE__*/_react.default.createElement(_signupView.SignupView, null)) : selectedMovie ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    md: 8,
+    style: {
+      border: "1px solid"
+    }
+  }, /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
+    style: {
+      border: "1px solid"
+    },
+    movie: selectedMovie,
+    onBackClick: function onBackClick() {
+      return setSelectedMovie(null);
+    }
+  })) : movies.length === 0 ? /*#__PURE__*/_react.default.createElement("div", {
     className: "main-view"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "movie-display"
-  }, movies.map(function (movie) {
-    return /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
+  }, "The list empty!") : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, movies.map(function (movie) {
+    return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
       key: movie._id,
+      className: "mb-4",
+      md: 3
+    }, /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
       movie: movie,
       onMovieClick: function onMovieClick(newSelectedMovie) {
         setSelectedMovie(newSelectedMovie);
       }
-    });
-  })), /*#__PURE__*/_react.default.createElement("button", {
+    }));
+  }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "justify-content-md-center"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    md: 2
+  }, /*#__PURE__*/_react.default.createElement("button", {
     onClick: function onClick() {
       setUser(null);
       setToken(null);
       localStorage.clear();
     }
-  }, "Log out"));
+  }, "Logout"))));
 };
 exports.MainView = MainView;
-},{"react":"../node_modules/react/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../signup-view/signup-view":"components/signup-view/signup-view.jsx"}],"../node_modules/bootstrap/dist/css/bootstrap.min.css":[function(require,module,exports) {
-
-        var reloadCSS = require('_css_loader');
-        module.hot.dispose(reloadCSS);
-        module.hot.accept(reloadCSS);
-      
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../signup-view/signup-view":"components/signup-view/signup-view.jsx","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
@@ -46268,14 +46269,14 @@ module.hot.accept(reloadCSS);
 var _react = _interopRequireDefault(require("react"));
 var _client = require("react-dom/client");
 var _mainView = require("./components/main-view/main-view");
-require("bootstrap/dist/css/bootstrap.min.css");
+var _reactBootstrap = require("react-bootstrap");
 require("./index.scss");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-// Import tatement to indicate that 'index.scss' needs to be bundled
+// Import statement to indicate that 'index.scss' needs to be bundled
 
 // Main component (will eventually use all the others)
 var MyFlixApplication = function MyFlixApplication() {
-  return /*#__PURE__*/_react.default.createElement(_mainView.MainView, null);
+  return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_mainView.MainView, null));
 };
 
 // Find the root of the app
@@ -46284,7 +46285,7 @@ var container = document.querySelector("#root"),
 
 // Tells React to render the app on the root DOM element
 root.render( /*#__PURE__*/_react.default.createElement(MyFlixApplication, null));
-},{"react":"../node_modules/react/index.js","react-dom/client":"../node_modules/react-dom/client.js","./components/main-view/main-view":"components/main-view/main-view.jsx","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","./index.scss":"index.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom/client":"../node_modules/react-dom/client.js","./components/main-view/main-view":"components/main-view/main-view.jsx","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./index.scss":"index.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
