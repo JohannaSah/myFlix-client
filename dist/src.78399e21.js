@@ -29829,36 +29829,28 @@ Object.defineProperty(exports, "__esModule", {
 exports.MovieCard = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
-var _this = void 0;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var MovieCard = function MovieCard(_ref) {
   var movie = _ref.movie,
     onMovieClick = _ref.onMovieClick;
-  render();
-  {
-    var _this$props = _this.props,
-      _movie = _this$props.movie,
-      onMovieCLick = _this$props.onMovieCLick;
-    return /*#__PURE__*/_react.default.createElement("div", {
-      className: "movie-card",
-      onClick: function onClick() {
-        onMovieClick(_movie);
-      }
-    }, _movie.title);
-  }
-  ;
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "movie-card",
+    onClick: function onClick() {
+      onMovieClick(movie);
+    }
+  }, movie.Title);
 };
 exports.MovieCard = MovieCard;
 MovieCard.propTypes = {
   movie: _propTypes.default.shape({
-    title: _propTypes.default.string.isRequired,
-    director: _propTypes.default.shape({
-      name: _propTypes.default.string.isRequired
+    Title: _propTypes.default.string.isRequired,
+    Director: _propTypes.default.shape({
+      Name: _propTypes.default.string
     }),
-    description: _propTypes.default.string.isRequired,
-    imageUrl: _propTypes.default.string.isRequired,
-    genre: _propTypes.default.shape({
-      name: _propTypes.default.string.isRequired
+    Description: _propTypes.default.string.isRequired,
+    imageUrl: _propTypes.default.string,
+    Genre: _propTypes.default.shape({
+      Name: _propTypes.default.string
     })
   }).isRequired,
   onMovieClick: _propTypes.default.func.isRequired
@@ -29904,19 +29896,19 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/_react.default.createElement("div", {
         className: "movie-image"
       }, /*#__PURE__*/_react.default.createElement("img", {
-        src: "movie.imageUrl",
+        src: movie.imageUrl,
         alt: "image",
         width: "100px",
         height: "100px"
       })), /*#__PURE__*/_react.default.createElement("div", {
         className: "movie-title"
-      }, /*#__PURE__*/_react.default.createElement("span", null, " Title: "), /*#__PURE__*/_react.default.createElement("span", null, movie.title)), /*#__PURE__*/_react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("span", null, " Title: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Title)), /*#__PURE__*/_react.default.createElement("div", {
         className: "movie-director"
-      }, /*#__PURE__*/_react.default.createElement("span", null, " Director: "), /*#__PURE__*/_react.default.createElement("span", null, movie.director.name)), /*#__PURE__*/_react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("span", null, " Director: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Director.Name)), /*#__PURE__*/_react.default.createElement("div", {
         className: "movie-genre"
-      }, /*#__PURE__*/_react.default.createElement("span", null, " Genre: "), /*#__PURE__*/_react.default.createElement("span", null, movie.genre.name)), /*#__PURE__*/_react.default.createElement("div", {
+      }, /*#__PURE__*/_react.default.createElement("span", null, " Genre: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Genre.Name)), /*#__PURE__*/_react.default.createElement("div", {
         className: "movie-description"
-      }, /*#__PURE__*/_react.default.createElement("span", null, " Description: "), /*#__PURE__*/_react.default.createElement("span", null, movie.description)), /*#__PURE__*/_react.default.createElement("button", {
+      }, /*#__PURE__*/_react.default.createElement("span", null, " Description: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Description)), /*#__PURE__*/_react.default.createElement("button", {
         onClick: function onClick() {
           onBackClick(null);
         }
@@ -29928,14 +29920,14 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
 exports.MovieView = MovieView;
 MovieView.propTypes = {
   movie: _propTypes.default.shape({
-    title: _propTypes.default.string.isRequired,
-    description: _propTypes.default.string.isRequired,
-    genre: _propTypes.default.shape({
-      name: _propTypes.default.string.isRequired,
-      description: _propTypes.default.string.isRequired
+    Title: _propTypes.default.string.isRequired,
+    Description: _propTypes.default.string.isRequired,
+    Genre: _propTypes.default.shape({
+      Name: _propTypes.default.string.isRequired,
+      Description: _propTypes.default.string.isRequired
     }),
-    director: _propTypes.default.shape({
-      name: _propTypes.default.string.isRequired
+    Director: _propTypes.default.shape({
+      Name: _propTypes.default.string.isRequired
     }),
     imageUrl: _propTypes.default.string.isRequired
   }).isRequired
@@ -29971,8 +29963,8 @@ var LoginView = function LoginView(_ref) {
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     var data = {
-      access: username,
-      secret: password
+      Username: username,
+      Password: password
     };
     fetch("https://movieapi-dcj2.onrender.com/login", {
       method: "POST",
@@ -29985,13 +29977,14 @@ var LoginView = function LoginView(_ref) {
     }).then(function (data) {
       console.log("Login response: ", data);
       if (data.user) {
-        localStorage.setItem("user".JSON.stringify(data.user));
+        localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
         onLoggedIn(data.user, data.token);
       } else {
         alert("No such user");
       }
     }).catch(function (e) {
+      console.log(e, "error");
       alert("Something went wrong");
     });
   };
@@ -30062,10 +30055,10 @@ var SignupView = function SignupView() {
   var handleSubmit = function handleSubmit(event) {
     event.preventDefault();
     var data = {
-      username: username,
-      password: password,
-      email: email,
-      birthday: birthday
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
     };
     fetch("https://movieapi-dcj2.onrender.com/users", {
       method: "POST",
@@ -30334,7 +30327,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49710" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52657" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -9,8 +9,8 @@ export const LoginView = ({onLoggedIn}) => {
         event.preventDefault();
 
         const data = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
 
         fetch("https://movieapi-dcj2.onrender.com/login", {
@@ -24,7 +24,7 @@ export const LoginView = ({onLoggedIn}) => {
             .then((data) => {
                 console.log("Login response: ", data);
                 if(data.user) {
-                    localStorage.setItem("user". JSON.stringify(data.user));
+                    localStorage.setItem("user", JSON.stringify(data.user));
                     localStorage.setItem("token", data.token);
                     onLoggedIn(data.user, data.token);
                 }
@@ -33,6 +33,7 @@ export const LoginView = ({onLoggedIn}) => {
                 }
             })
             .catch((e) => {
+                console.log(e, "error");
                 alert("Something went wrong");
             });
     };

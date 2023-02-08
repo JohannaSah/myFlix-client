@@ -9,23 +9,23 @@ export class MovieView extends React.Component {
         return (
             <div className="movie-view">
                 <div className="movie-image">
-                    <img src="movie.imageUrl" alt="image" width ={"100px"} height={"100px"} />
+                    <img src={movie.imageUrl} alt="image" width ={"100px"} height={"100px"} />
                 </div>
                 <div className="movie-title">
                     <span> Title: </span>
-                    <span>{movie.title}</span>
+                    <span>{movie.Title}</span>
                 </div>
                 <div className="movie-director">
                     <span> Director: </span>
-                    <span>{movie.director.name}</span>
+                    <span>{movie.Director.Name}</span>
                 </div>
                 <div className="movie-genre">
                     <span> Genre: </span>
-                    <span>{movie.genre.name}</span>
+                    <span>{movie.Genre.Name}</span>
                 </div>
                 <div className="movie-description">
                     <span> Description: </span>
-                    <span>{movie.description}</span>
+                    <span>{movie.Description}</span>
                 </div>
                 <button onClick={() => { onBackClick(null); }}>Back</button>
             </div>
@@ -35,14 +35,14 @@ export class MovieView extends React.Component {
 
 MovieView.propTypes = {
     movie: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      genre: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired
+      Title: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+      Genre: PropTypes.shape({
+        Name: PropTypes.string.isRequired,
+        Description: PropTypes.string.isRequired
       }),
-      director: PropTypes.shape({
-        name: PropTypes.string.isRequired
+      Director: PropTypes.shape({
+        Name: PropTypes.string.isRequired
       }),
       imageUrl: PropTypes.string.isRequired
     }).isRequired,
