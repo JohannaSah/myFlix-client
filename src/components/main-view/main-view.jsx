@@ -9,14 +9,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
     const [movies, setMovies] = useState([]);
-    // const [selectedMovie, setSelectedMovie] = useState(null); Is it correct to delete this?
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [user, setUser] = useState(storedUser? storedUser : null);
     const [token, setToken] = useState(storedToken? storedToken: null);
 
-// I do not know how to  connect the 2 useEffect, but I believe they should be 1 
-// also the if statements should be included in the useEffect but I do not know how at this time
     useEffect(() => {
       if (!token) {
         return;
@@ -122,23 +119,6 @@ export const MainView = () => {
             />
           </Routes>
         </Row>
-
-
-        {/** is the Logout button correct???  */}
-        <Row className="justify-content-md-center"> 
-          <Col md={2}>
-            <Button
-              onClick={() => {
-              setUser(null);
-              setToken(null);
-              localStorage.clear();
-              }}
-            >
-              Logout
-            </Button>
-          </Col>
-        </Row>
-          
       </BrowserRouter>
     );
   };
