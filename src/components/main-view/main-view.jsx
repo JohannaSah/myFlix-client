@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
     const [movies, setMovies] = useState([]);
-    const [selectedMovie, setSelectedMovie] = useState(null);
+    // const [selectedMovie, setSelectedMovie] = useState(null); Is it correct to delete this?
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [user, setUser] = useState(storedUser? storedUser : null);
@@ -31,60 +31,105 @@ export const MainView = () => {
     }, [token]);
 
     return (
-      <>
+      <BrowserRouter>
         <Row className="justify-content-md-center">
-        {!user ? (
-              <Col md={5}>
-                <LoginView 
-                  onLoggedIn={(user, token) => {
-                    setUser(user);
-                    setToken(token);
-                  }}
-                />
-                or
-                <SignupView />
-              </Col>
-          ) : selectedMovie ? (
-              <Col md={8} style={{ border: "1px solid" }}>
-                <MovieView 
-                  style={{ border: "1px solid" }}
-                  movie={selectedMovie}
-                  onBackClick={() => setSelectedMovie(null)}
-                />              
-              </Col>
-          ) : movies.length === 0 ? (
-              <div className="main-view"> 
-                The list empty! 
-              </div>
-          ) : (
-              <>
-                {movies.map((movie) => (
-                    <Col key={movie._id} className="mb-4" md={3}>
-                      <MovieCard
-                        movie={movie}
-                        onMovieClick={(newSelectedMovie) => {
-                            setSelectedMovie(newSelectedMovie);
-                        }}
-                      />
-                    </Col>
-                ))}
-              </>
-          )
-        }
-      </Row>
-      <Row className="justify-content-md-center">
-        <Col md={2}>
-          <Button
-            onClick={() => {
-            setUser(null);
-            setToken(null);
-            localStorage.clear();
-            }}
-          >
-            Logout
-          </Button>
-        </Col>
-      </Row>
-      </>
+          <Routes>
+            <Route 
+              path="/signup"
+              element={
+                <>
+                  {user ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <Col md={5}>
+                        <SignupView />
+                      </Col>
+                    )
+                  }
+                </>
+              }
+            />
+            <Route 
+              path="/login"
+              element={
+                <>
+                  {user ? (
+                      <Navigate to="/" />
+                    ) : (
+                      <Col md={5}>
+                        <LoginView 
+                          onLoggedIn={(user) => {
+                            setUser(user);
+                            setToken(token);
+                          }}
+                        />
+                      </Col>
+                    )
+                  }
+                </>
+              }
+            />
+            <Route 
+              path="/movies/:Title" 
+              element={
+                <>
+                  {!user ? (
+                      <Navigate to="/login" replace />
+                    ) : movies.length === 0 ? (
+                      <Col>
+                        The list is empty!
+                      </Col>
+                    ) : (
+                      <Col md={8}>
+                        <MovieView movies={movies} />
+                      </Col>
+                    )
+                  }
+                </>
+              }
+            />
+            <Route 
+              path="/"
+              element={
+                <>
+                  {!user ? (
+                      <Navigate to="/login" replace />
+                    ) : movies.length === 0 ? (
+                      <Col> 
+                        This list is empty! 
+                      </Col>
+                    ) : (
+                      <>
+                        {movies.map((movie) => (
+                          <Col className="mb-4" key={movie._id} md={3}>
+                            <MovieCard movie={movie} />
+                          </Col>
+                        ))}
+                      </>
+                    )
+                  }
+                </>
+              }
+            />
+          </Routes>
+        </Row>
+
+
+        {/** is the Logout button correct???  */}
+        <Row className="justify-content-md-center"> 
+          <Col md={2}>
+            <Button
+              onClick={() => {
+              setUser(null);
+              setToken(null);
+              localStorage.clear();
+              }}
+            >
+              Logout
+            </Button>
+          </Col>
+        </Row>
+          
+      </BrowserRouter>
     );
   };
