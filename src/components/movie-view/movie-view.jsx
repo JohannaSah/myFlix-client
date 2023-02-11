@@ -21,7 +21,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         );
       });
 
-      const addFavoriteMovies = () => {
+    const addFavoriteMovies = () => {
         fetch(`https://movieapi-dcj2.onrender.com/users/${username}/movies/${movieId}`,
         {
             method: "POST",
