@@ -52869,14 +52869,21 @@ var MovieCard = function MovieCard(_ref) {
   var movie = _ref.movie;
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "h-100"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "h-50"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    className: "h-100 text-center mt-3"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Img, {
     variant: "top",
-    src: movie.imageUrl
-  }), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, movie.Description), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, "Director: ", movie.Director.Name), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, "Genre: ", movie.Genre.Name), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    src: movie.imageUrl,
+    className: "img-fluid h-100 w-auto movie-card-img"
+  }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, movie.Description), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "d-flex flex-row justify-content-between align-items-baseline mt-auto"
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: '/movies/${encodeURIComponent(movie.Title)}'
-  }, " ", /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     variant: "link"
-  }, "Open"))));
+  }, "Details")))));
 };
 exports.MovieCard = MovieCard;
 MovieCard.propTypes = {
@@ -52892,62 +52899,7 @@ MovieCard.propTypes = {
     })
   }).isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-  return bundleURL;
-}
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-  return '/';
-}
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-function updateLink(link) {
-  var newLink = link.cloneNode();
-  newLink.onload = function () {
-    link.remove();
-  };
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-var cssTimeout = null;
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-    cssTimeout = null;
-  }, 50);
-}
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/movie-view/movie-view.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52957,7 +52909,9 @@ exports.MovieView = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _reactRouter = require("react-router");
+var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
+var _movieCard = require("../movie-card/movie-card");
 require("./movie-view.scss");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var MovieView = function MovieView(_ref) {
@@ -52967,28 +52921,58 @@ var MovieView = function MovieView(_ref) {
   var movie = movies.find(function (movie) {
     return movie.Title === movieTitle;
   });
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "movie-view"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "movie-image"
+  var similarMovies = movies.filter(function (filteredMovie) {
+    return filteredMovie.Genre.Name === movie.Genre.Name && filteredMovie.Title !== movie.Title;
+  });
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, movies.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, "This list is empty!") : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "d-flex flex-row-reverse p-3"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    md: 5,
+    className: "text-center text-md-end"
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: movie.imageUrl,
-    alt: "image",
-    className: "w-100"
-  })), /*#__PURE__*/_react.default.createElement("div", {
-    className: "movie-title"
-  }, /*#__PURE__*/_react.default.createElement("span", null, " Title: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Title)), /*#__PURE__*/_react.default.createElement("div", {
-    className: "movie-description"
-  }, /*#__PURE__*/_react.default.createElement("span", null, " Description: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Description)), /*#__PURE__*/_react.default.createElement("div", {
-    className: "movie-director"
-  }, /*#__PURE__*/_react.default.createElement("span", null, " Director: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Director.Name)), /*#__PURE__*/_react.default.createElement("div", {
-    className: "movie-genre"
-  }, /*#__PURE__*/_react.default.createElement("span", null, " Genre: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Genre.Name)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, null, /*#__PURE__*/_react.default.createElement("button", {
-    className: "back-button",
-    style: {
-      cursor: "pointer"
-    }
-  }, "Back")));
+    src: movie.image,
+    alt: "Poster for ".concat(movie.title),
+    className: "img-fluid h-100 w-auto movie-view-img"
+  })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    md: 7,
+    className: "d-flex flex-column"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "d-flex flex-row  justify-content-between"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    md: 9,
+    className: "d-flex flex-column"
+  }, /*#__PURE__*/_react.default.createElement("h3", {
+    className: "my-0"
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Title: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Title)), /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement("span", null, "Director: "), /*#__PURE__*/_react.default.createElement("span", null, movie.Director))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    md: 3,
+    className: "align-self-end mb-2 text-end"
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Genre:"), /*#__PURE__*/_react.default.createElement("span", null, movie.Genre.Name))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "mt-md-5 mb-4"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "text-decoration-underline mb-2"
+  }, "Description:", ' '), /*#__PURE__*/_react.default.createElement("span", null, movie.description)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "d-flex flex-row justify-content-between mt-auto mb-md-4"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    className: "text-end"
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+    variant: "secondary",
+    size: "lg"
+  }, "Back")))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement("h2", {
+    className: "mt-0"
+  }, "Similar movies"), /*#__PURE__*/_react.default.createElement("hr", null), similarMovies.map(function (movie) {
+    return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+      className: "mb-5",
+      key: movie.id,
+      xs: 12,
+      sm: 6,
+      md: 4,
+      lg: 3
+    }, /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
+      movie: movie
+    }));
+  }))));
 };
 exports.MovieView = MovieView;
 MovieView.propTypes = {
@@ -53005,7 +52989,7 @@ MovieView.propTypes = {
     imageUrl: _propTypes.default.string
   }).isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-router":"../node_modules/react-router/dist/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-router":"../node_modules/react-router/dist/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","./movie-view.scss":"components/movie-view/movie-view.scss"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53062,7 +53046,17 @@ var LoginView = function LoginView(_ref) {
       alert("Something went wrong");
     });
   };
-  return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
+  return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "justify-content-md-center"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    md: 4
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "mt-5 text-left text-muted"
+  }, "Welcome to"), /*#__PURE__*/_react.default.createElement("h1", {
+    className: "text-left font-weight-bold"
+  }, "MyFlix"))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.CardGroup, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
+    className: "border-0 mt-"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
     onSubmit: handleSubmit
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formLoginUsername"
@@ -53088,7 +53082,7 @@ var LoginView = function LoginView(_ref) {
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     variant: "primary",
     type: "submit"
-  }, "Submit"));
+  }, "Submit"))))))));
 };
 exports.LoginView = LoginView;
 LoginView.propTypes = {
@@ -53159,7 +53153,9 @@ var SignupView = function SignupView() {
       }
     });
   };
-  return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
+  return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.CardGroup, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
+    className: "border-0"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
     onSubmit: handleSubmit
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formSignUpUsername"
@@ -53206,7 +53202,7 @@ var SignupView = function SignupView() {
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     type: "submit",
     variant: "primary"
-  }, "Submit"));
+  }, "Submit")))))));
 };
 exports.SignupView = SignupView;
 },{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/navigation-bar/navigation-bar.jsx":[function(require,module,exports) {
@@ -53219,12 +53215,15 @@ exports.NavigationBar = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
+require("./navigation-bar.scss");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var NavigationBar = function NavigationBar(_ref) {
   var user = _ref.user,
     onLoggedOut = _ref.onLoggedOut;
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Navbar, {
+    className: "mb-4",
     bg: "light",
+    variant: "light",
     expand: "lg"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Navbar.Brand, {
     as: _reactRouterDom.Link,
@@ -53252,7 +53251,177 @@ var NavigationBar = function NavigationBar(_ref) {
   }, "Logout"))))));
 };
 exports.NavigationBar = NavigationBar;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js","./navigation-bar.scss":"components/navigation-bar/navigation-bar.scss"}],"components/profile-view/profile-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProfileView = void 0;
+var _react = _interopRequireWildcard(require("react"));
+var _reactBootstrap = require("react-bootstrap");
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var ProfileView = function ProfileView() {
+  var _useState = (0, _react.useState)(""),
+    _useState2 = _slicedToArray(_useState, 2),
+    username = _useState2[0],
+    setUsername = _useState2[1];
+  var _useState3 = (0, _react.useState)(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    email = _useState4[0],
+    setEmail = _useState4[1];
+  var _useState5 = (0, _react.useState)(""),
+    _useState6 = _slicedToArray(_useState5, 2),
+    password = _useState6[0],
+    setPassword = _useState6[1];
+  var _useState7 = (0, _react.useState)(""),
+    _useState8 = _slicedToArray(_useState7, 2),
+    birthday = _useState8[0],
+    setBirthday = _useState8[1];
+  var user = JSON.parse(localStorage.getItem("user"));
+  var storedToken = localStorage.getItem("token");
+  var handleUpdate = function handleUpdate(e) {
+    e.preventDefault();
+    var data = {
+      Username: username,
+      Email: email,
+      Password: password,
+      Birthday: birthday
+    };
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(user.Username), {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        headers: {
+          Authorization: "Bearer ".concat(storedToken)
+        }
+      },
+      body: JSON.stringify(data)
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      if (data.newUser) {
+        localStorage.setItem("user", JSON.stringify(data.newUser));
+        alert("Update successful");
+        setUser(data.newUser);
+      } else {
+        alert("Unable to update your information");
+      }
+    }).catch(function (e) {
+      return console.log(e);
+    });
+  };
+  handleDelete = function handleDelete() {
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(user.Username), {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        headers: {
+          Authorization: "Bearer ".concat(storedToken)
+        }
+      }
+    }).then(function (response) {
+      if (response.ok) {
+        alert("Your account has been deleted");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.reload();
+      } else alert("Unable to delete your information");
+    }).catch(function (error) {
+      return console.log(error);
+    });
+  };
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
+    className: "bg-dark border-0",
+    style: {
+      marginTop: 75
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
+    style: {
+      textAlign: "center"
+    }
+  }, "User Information"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    className: "mb-3"
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Username: ", username)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    className: "mb-3"
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Email: ", email)))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+    variant: "danger",
+    type: "delete",
+    onClick: function onClick() {
+      return handleDelete(user._id);
+    }
+  }, "Delete"))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
+    className: "bg-dark border-0",
+    style: {
+      marginTop: 75
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
+    style: {
+      textAlign: "center"
+    }
+  }, "Update Profile"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
+    onSubmit: function onSubmit(e) {
+      return handleUpdate(e);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
+    controlId: "formUsername",
+    className: "mb-3"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Username"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "text",
+    value: username,
+    onChange: function onChange(e) {
+      setUsername(e.target.value);
+    },
+    required: true,
+    minlenght: "3",
+    placeholder: "Username"
+  })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
+    controlId: "formPassword",
+    className: "mb-3"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Password"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "password",
+    value: password,
+    onChange: function onChange(e) {
+      setPassword(e.target.value);
+    },
+    required: true,
+    placeholder: "Password"
+  })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
+    controlId: "formEmail",
+    className: "mb-3"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Email"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "email",
+    value: email,
+    onChange: function onChange(e) {
+      setEmail(e.target.value);
+    },
+    required: true,
+    placeholder: "Email"
+  })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
+    controlId: "formPassword",
+    className: "mb-3"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
+    type: "text",
+    value: birthday,
+    onChange: function onChange(e) {
+      setBirthday(e.target.value);
+    },
+    required: true,
+    placeholder: "Birthday"
+  })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+    variant: "danger",
+    type: "submit"
+  }, "Update"))))))));
+};
+exports.ProfileView = ProfileView;
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53265,6 +53434,7 @@ var _movieView = require("../movie-view/movie-view");
 var _loginView = require("../login-view/login-view");
 var _signupView = require("../signup-view/signup-view");
 var _navigationBar = require("../navigation-bar/navigation-bar");
+var _profileView = require("../profile-view/profile-view");
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -53276,12 +53446,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MainView = function MainView() {
+  var storedUser = JSON.parse(localStorage.getItem("user"));
+  var storedToken = localStorage.getItem("token");
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     movies = _useState2[0],
     setMovies = _useState2[1];
-  var storedUser = JSON.parse(localStorage.getItem("user"));
-  var storedToken = localStorage.getItem("token");
   var _useState3 = (0, _react.useState)(storedUser ? storedUser : null),
     _useState4 = _slicedToArray(_useState3, 2),
     user = _useState4[0],
@@ -53344,6 +53514,17 @@ var MainView = function MainView() {
       movies: movies
     })))
   }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+    path: "/profile",
+    element: /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !user ? /*#__PURE__*/_react.default.createElement(_reactRouterDom.Navigate, {
+      to: "/login",
+      replace: true
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+      md: 8
+    }, /*#__PURE__*/_react.default.createElement(_profileView.ProfileView, {
+      user: user,
+      movies: movies
+    })))
+  }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/",
     element: /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !user ? /*#__PURE__*/_react.default.createElement(_reactRouterDom.Navigate, {
       to: "/login",
@@ -53360,7 +53541,58 @@ var MainView = function MainView() {
   }))));
 };
 exports.MainView = MainView;
-},{"react":"../node_modules/react/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../signup-view/signup-view":"components/signup-view/signup-view.jsx","../navigation-bar/navigation-bar":"components/navigation-bar/navigation-bar.jsx","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../signup-view/signup-view":"components/signup-view/signup-view.jsx","../navigation-bar/navigation-bar":"components/navigation-bar/navigation-bar.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+  return bundleURL;
+}
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+  return '/';
+}
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+    cssTimeout = null;
+  }, 50);
+}
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
@@ -53411,7 +53643,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58354" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51931" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
@@ -53555,5 +53787,90 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}],"../node_modules/parcel-bundler/src/builtins/bundle-loader.js":[function(require,module,exports) {
+var getBundleURL = require('./bundle-url').getBundleURL;
+function loadBundlesLazy(bundles) {
+  if (!Array.isArray(bundles)) {
+    bundles = [bundles];
+  }
+  var id = bundles[bundles.length - 1];
+  try {
+    return Promise.resolve(require(id));
+  } catch (err) {
+    if (err.code === 'MODULE_NOT_FOUND') {
+      return new LazyPromise(function (resolve, reject) {
+        loadBundles(bundles.slice(0, -1)).then(function () {
+          return require(id);
+        }).then(resolve, reject);
+      });
+    }
+    throw err;
+  }
+}
+function loadBundles(bundles) {
+  return Promise.all(bundles.map(loadBundle));
+}
+var bundleLoaders = {};
+function registerBundleLoader(type, loader) {
+  bundleLoaders[type] = loader;
+}
+module.exports = exports = loadBundlesLazy;
+exports.load = loadBundles;
+exports.register = registerBundleLoader;
+var bundles = {};
+function loadBundle(bundle) {
+  var id;
+  if (Array.isArray(bundle)) {
+    id = bundle[1];
+    bundle = bundle[0];
+  }
+  if (bundles[bundle]) {
+    return bundles[bundle];
+  }
+  var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
+  var bundleLoader = bundleLoaders[type];
+  if (bundleLoader) {
+    return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
+      if (resolved) {
+        module.bundle.register(id, resolved);
+      }
+      return resolved;
+    }).catch(function (e) {
+      delete bundles[bundle];
+      throw e;
+    });
+  }
+}
+function LazyPromise(executor) {
+  this.executor = executor;
+  this.promise = null;
+}
+LazyPromise.prototype.then = function (onSuccess, onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.then(onSuccess, onError);
+};
+LazyPromise.prototype.catch = function (onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.catch(onError);
+};
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js":[function(require,module,exports) {
+module.exports = function loadCSSBundle(bundle) {
+  return new Promise(function (resolve, reject) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = bundle;
+    link.onerror = function (e) {
+      link.onerror = link.onload = null;
+      reject(e);
+    };
+    link.onload = function () {
+      link.onerror = link.onload = null;
+      resolve();
+    };
+    document.getElementsByTagName('head')[0].appendChild(link);
+  });
+};
+},{}],0:[function(require,module,exports) {
+var b=require("../node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("css",require("../node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js"));b.load([]).then(function(){require("index.jsx");});
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0], null)
 //# sourceMappingURL=/src.78399e21.js.map
