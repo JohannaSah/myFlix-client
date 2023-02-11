@@ -4,7 +4,6 @@ import { useParams } from 'react-router';
 import { Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
-import "./movie-view.scss";
 
 export const MovieView = ({movies}) => {     
     

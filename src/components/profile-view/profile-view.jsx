@@ -40,7 +40,7 @@ export const ProfileView = () => {
         .catch((e) => console.log(e));
     };
   
-    handleDelete = () => {
+    const handleDelete = () => {
       fetch(`https://movieapi-dcj2.onrender.com/users/${user.Username}`, {
         method: "DELETE",
         headers: {
