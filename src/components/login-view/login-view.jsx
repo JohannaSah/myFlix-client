@@ -43,7 +43,7 @@ export const LoginView = ({onLoggedIn}) => {
         <Container>
             <Row className='justify-content-md-center'>
                 <Col md={4}>
-                    <div className='mt-5 text-left text-muted'>Welcome to</div>
+                    <div className='mt-5 text-center text-muted'>Welcome to</div>
                     <h1 className='text-left font-weight-bold'>MyFlix</h1>
                 </Col>
             </Row>

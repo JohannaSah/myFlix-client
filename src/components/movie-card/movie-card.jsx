@@ -6,10 +6,13 @@ import { Link } from "react-router-dom";
 export const MovieCard = ({movie}) => {
         return (
             <Card
-                className="h-100"
+                className="h-100 movieCard"
+
             >
                 <Row className='h-50'>
-                    <Col className='h-100 text-center mt-3'>
+                    <Col 
+                        className='h-100 text-center mt-3'
+                    >
                     <Card.Img 
                         variant="top" 
                         src={movie.imageUrl}
