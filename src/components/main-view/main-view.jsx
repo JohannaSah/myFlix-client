@@ -73,7 +73,7 @@ export const MainView = () => {
       </Row>
       <Row className="justify-content-md-center">
         <Col md={2}>
-          <button
+          <Button
             onClick={() => {
             setUser(null);
             setToken(null);
@@ -81,7 +81,7 @@ export const MainView = () => {
             }}
           >
             Logout
-          </button>
+          </Button>
         </Col>
       </Row>
       </>
