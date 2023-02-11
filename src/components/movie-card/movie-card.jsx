@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Button, Card } from "react-bootstrap";
+import {Button, Card, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({movie}) => {
@@ -8,7 +8,15 @@ export const MovieCard = ({movie}) => {
             <Card
                 className="h-100"
             >
-                <Card.Img variant="top" src={movie.imageUrl}/> 
+                <Row className='h-50'>
+                    <Col className='h-100 text-center mt-3'>
+                    <Card.Img 
+                        variant="top" 
+                        src={movie.imageUrl}
+                        className='img-fluid h-100 w-auto movie-card-img'
+                    />
+                    </Col>
+                </Row>
                 <Card.Body>
                     <Card.Title>
                         {movie.Title}
@@ -16,19 +24,16 @@ export const MovieCard = ({movie}) => {
                     <Card.Text>
                         {movie.Description}
                     </Card.Text>
-                    <Card.Text>
-                        Director: {movie.Director.Name}
-                    </Card.Text>
-                    <Card.Text>
-                        Genre: {movie.Genre.Name}
-                    </Card.Text>
-                    <Link to={'/movies/${encodeURIComponent(movie.Title)}'}> {/* should this be Title or _id ?? */}
-                    <Button
-                        variant="link"
-                    >
-                        Open
-                    </Button>
-                    </Link>
+                    <Row className='d-flex flex-row justify-content-between align-items-baseline mt-auto'>
+                        <Link to={'/movies/${encodeURIComponent(movie.Title)}'}>
+                            <Button
+                                variant="link"
+                            >
+                                Details
+                            </Button>
+                        </Link>
+                    </Row>
+                    
                 </Card.Body>
             </Card>
         );
