@@ -52880,7 +52880,7 @@ var MovieCard = function MovieCard(_ref) {
   }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, movie.Description), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
     className: "d-flex flex-row justify-content-between align-items-baseline mt-auto"
   }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: '/movies/${encodeURIComponent(movie.Title)}'
+    to: "/movies/".concat(encodeURIComponent(movie.Title))
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     variant: "link"
   }, "Details")))));
@@ -52943,8 +52943,10 @@ var MovieView = function MovieView(_ref) {
     _useState6 = _slicedToArray(_useState5, 2),
     userFavoriteMovies = _useState6[0],
     setUserFavoriteMovies = _useState6[1];
-  var similarMovies = movies.filter(function (filteredMovie) {
-    return filteredMovie.Genre.Name === movie.Genre.Name && filteredMovie.Title !== movie.Title;
+  var similarMovies = movies.filter(function (_ref2) {
+    var Name = _ref2.Genre.Name,
+      Title = _ref2.Title;
+    return Name == movie.Genre.Name && Title != movie.Title;
   });
   var addFavoriteMovies = function addFavoriteMovies() {
     fetch("https://movieapi-dcj2.onrender.com/users/".concat(username, "/movies/").concat(movieId), {
@@ -53003,7 +53005,7 @@ var MovieView = function MovieView(_ref) {
     }
   };
   console.log("movieExists", movieExists);
-  useEffect(function () {
+  (0, _react.useEffect)(function () {
     movieAdded();
     movieRemoved();
   }, []);
@@ -53012,7 +53014,7 @@ var MovieView = function MovieView(_ref) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
     md: 5,
     className: "text-center text-md-end"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Image, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Img, {
     src: movie.imageUrl,
     alt: "Poster for ".concat(movie.Title),
     className: "img-fluid h-100 w-auto movie-view-img"
@@ -53024,7 +53026,7 @@ var MovieView = function MovieView(_ref) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
     md: 9,
     className: "d-flex flex-column"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, "Director: "), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, movie.Director)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, "Genre:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, movie.Genre.Name)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, "Description:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, movie.Description)))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, "Director: "), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, movie.Director.Name)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, "Genre:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, movie.Genre.Name)), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, "Description:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, movie.Description)))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
     className: "d-flex flex-row justify-content-between mt-auto mb-md-4"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/"
@@ -53056,18 +53058,9 @@ var MovieView = function MovieView(_ref) {
 };
 exports.MovieView = MovieView;
 MovieView.propTypes = {
-  movie: _propTypes.default.shape({
-    Title: _propTypes.default.string.isRequired,
-    Description: _propTypes.default.string.isRequired,
-    Genre: _propTypes.default.shape({
-      Name: _propTypes.default.string.isRequired,
-      Description: _propTypes.default.string.isRequired
-    }),
-    Director: _propTypes.default.shape({
-      Name: _propTypes.default.string.isRequired
-    }),
-    imageUrl: _propTypes.default.string
-  }).isRequired
+  movies: _propTypes.default.array,
+  username: _propTypes.default.string,
+  FavoriteMovies: _propTypes.default.array
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-router":"../node_modules/react-router/dist/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-router-dom":"../node_modules/react-router-dom/dist/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
 "use strict";
@@ -53809,7 +53802,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57950" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51167" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
