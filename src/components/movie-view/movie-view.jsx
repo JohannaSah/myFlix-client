@@ -1,15 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./movie-view.scss";
 
-export class MovieView extends React.Component {
-
-    render() {
-        const { movie, onBackClick} = this.props;
-        
+export const MovieView = ({movie, onBackClick}) => {        
         return (
             <div className="movie-view">
                 <div className="movie-image">
-                    <img src={movie.imageUrl} alt="image" width ={"100px"} height={"100px"} />
+                    <img src={movie.imageUrl} alt="image" className="w-100" />
                 </div>
                 <div className="movie-title">
                     <span> Title: </span>
@@ -27,10 +24,15 @@ export class MovieView extends React.Component {
                     <span> Description: </span>
                     <span>{movie.Description}</span>
                 </div>
-                <button onClick={() => { onBackClick(null); }}>Back</button>
+                <button 
+                    onClick={() => { onBackClick(null); }} 
+                    className="back-button"
+                    style={{cursor: "pointer"}}
+                >
+                    Back
+                </button>
             </div>
         );
-    }
 }
 
 MovieView.propTypes = {
@@ -44,6 +46,6 @@ MovieView.propTypes = {
       Director: PropTypes.shape({
         Name: PropTypes.string.isRequired
       }),
-      imageUrl: PropTypes.string.isRequired
+      imageUrl: PropTypes.string
     }).isRequired,
   };
