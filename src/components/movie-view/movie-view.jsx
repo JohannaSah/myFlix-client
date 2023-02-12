@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from 'react-router';
 import { Button, Row, Col, Card, Container } from "react-bootstrap";
@@ -14,12 +14,10 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     const [disableRemove, setDisableRemove] = useState(true);
     const [userFavoriteMovies, setUserFavoriteMovies] = useState(storedUser.FavoriteMovies ? storedUser.FavoriteMovies: FavoriteMovies);
 
-    let similarMovies = movies.filter((filteredMovie) => {
-        return (
-          filteredMovie.Genre.Name === movie.Genre.Name &&
-          filteredMovie.Title !== movie.Title
-        );
-      });
+    let similarMovies = movies.filter(
+        ({ Genre: { Name }, Title }) =>
+             Name == movie.Genre.Name && Title != movie.Title
+    );
 
     const addFavoriteMovies = () => {
         fetch(`https://movieapi-dcj2.onrender.com/users/${username}/movies/${movieId}`,
@@ -97,11 +95,11 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                     <Card> 
                         <Row className='d-flex flex-row-reverse p-3'>
                             <Col md={5} className='text-center text-md-end'>
-                                <Card.Image
-                                    src={movie.imageUrl}
-                                    alt={`Poster for ${movie.Title}`}
-                                    className='img-fluid h-100 w-auto movie-view-img'
-                                />
+                            <Card.Img
+                                src={movie.imageUrl}
+                                alt={`Poster for ${movie.Title}`}
+                                className='img-fluid h-100 w-auto movie-view-img'
+                            />
                             </Col>
                             <Col md={7} className='d-flex flex-column'>
                                 <Row className='d-flex flex-row  justify-content-between'>
@@ -113,7 +111,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                             <Card.Text>
                                                 <Row>
                                                     <Col>Director: </Col>
-                                                    <Col>{movie.Director}</Col>
+                                                    <Col>{movie.Director.Name}</Col>
                                                 </Row>
                                                 <Row>
                                                     <Col>Genre:</Col>
@@ -179,16 +177,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
 }
 
 MovieView.propTypes = {
-    movie: PropTypes.shape({
-      Title: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired,
-      Genre: PropTypes.shape({
-        Name: PropTypes.string.isRequired,
-        Description: PropTypes.string.isRequired
-      }),
-      Director: PropTypes.shape({
-        Name: PropTypes.string.isRequired
-      }),
-      imageUrl: PropTypes.string
-    }).isRequired,
-  };
+    movies: PropTypes.array,
+    username: PropTypes.string,
+    FavoriteMovies: PropTypes.array
+};
