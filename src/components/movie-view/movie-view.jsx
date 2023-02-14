@@ -65,14 +65,16 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     };
 
     const movieAdded = () => {
-        const hasMovie = userFavoriteMovies.some((m) => m.Title === Title)
+        const hasMovie = userFavoriteMovies.some((m) => m.Title === Title);
+
         if (hasMovie) {
             setMovieExists(true)
         }
     };
 
     const movieRemoved = () => {
-        const hasMovie = userFavoriteMovies.some((m) => m.Title === Title)
+        const hasMovie = userFavoriteMovies.some((m) => m.Title === Title);
+
         if (hasMovie) {
             setDisableRemove(false)
         }
@@ -81,7 +83,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     console.log("movieExists", movieExists)
 
     useEffect (() => {
-        movieAdded()
+        movieAdded();
         movieRemoved()
     },[])
     
