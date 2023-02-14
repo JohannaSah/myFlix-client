@@ -7,8 +7,8 @@ import { MovieCard } from "../movie-card/movie-card";
 
 export const MovieView = ({movies, username, FavoriteMovies}) => {     
     
-    const { movieTitle } = useParams();
-    const movie = movies.find((movie) => movie.Title === movieTitle ); 
+    const { Title } = useParams();
+    const movie = movies.find((movie) => movie.Title === Title ); 
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const [movieExists, setMovieExists] = useState(false);
     const [disableRemove, setDisableRemove] = useState(true);
@@ -30,7 +30,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         })
         .then(res => res.json())
         .then(response => {
-            console.log(storedToken)
+            console.log(storedToken);
             setUserFavoriteMovies(response.FavoriteMovies)
             if (response) {
                 alert("Movie added to Favorites!");
@@ -40,7 +40,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                 alert("Something went wrong");
             }
         });
-    }
+    };
 
     const removeFavoriteMovie = () => {
         fetch (`https://movieapi-dcj2.onrender.com/users/${username}/movies/${movieId}`,
@@ -57,6 +57,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                 alert("Movie removed from Favorites");
                 localStorage.setItem("user", JSON.stringify (response))
                 window.location.reload();
+
             } else {
                 alert("Something went wrong");
             }
@@ -147,7 +148,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                             onClick={removeFavoriteMovie}
                                             disabled={disableRemove}
                                         >
-                                            - Remove from Favorites
+                                            Remove from Favorites
                                         </Button>
                                     </Col>
                                 </Row>                                
