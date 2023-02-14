@@ -52949,7 +52949,7 @@ var MovieView = function MovieView(_ref) {
     return Name == movie.Genre.Name && Title != movie.Title;
   });
   var addFavoriteMovies = function addFavoriteMovies() {
-    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username, "/movies/").concat(movieId), {
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username, "/movies/").concat(Title), {
       method: "POST",
       headers: {
         Authorization: "Bearer ".concat(storedToken),
@@ -52970,7 +52970,7 @@ var MovieView = function MovieView(_ref) {
     });
   };
   var removeFavoriteMovie = function removeFavoriteMovie() {
-    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username, "/movies/").concat(movieId), {
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username, "/movies/").concat(Title), {
       method: "DELETE",
       headers: {
         Authorization: "Bearer ".concat(storedToken),
@@ -52990,7 +52990,7 @@ var MovieView = function MovieView(_ref) {
   };
   var movieAdded = function movieAdded() {
     var hasMovie = userFavoriteMovies.some(function (m) {
-      return m._id === movieId;
+      return m.Title === Title;
     });
     if (hasMovie) {
       setMovieExists(true);
@@ -52998,7 +52998,7 @@ var MovieView = function MovieView(_ref) {
   };
   var movieRemoved = function movieRemoved() {
     var hasMovie = userFavoriteMovies.some(function (m) {
-      return m._id === movieId;
+      return m.Title === Title;
     });
     if (hasMovie) {
       setDisableRemove(false);
@@ -53046,7 +53046,7 @@ var MovieView = function MovieView(_ref) {
   }, "Similar movies"), /*#__PURE__*/_react.default.createElement("hr", null), similarMovies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
       className: "mb-5",
-      key: movie.id,
+      key: movie.Title,
       xs: 12,
       sm: 6,
       md: 4,
