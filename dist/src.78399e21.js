@@ -52931,6 +52931,7 @@ var MovieView = function MovieView(_ref) {
     return movie.Title === Title;
   });
   var storedUser = JSON.parse(localStorage.getItem("user"));
+  var storedToken = localStorage.getItem('token');
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     movieExists = _useState2[0],
@@ -52948,8 +52949,8 @@ var MovieView = function MovieView(_ref) {
       Title = _ref2.Title;
     return Name == movie.Genre.Name && Title != movie.Title;
   });
-  var addFavoriteMovies = function addFavoriteMovies() {
-    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username, "/movies/").concat(Title), {
+  var addFavoriteMovies = function addFavoriteMovies(Title) {
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(storedUser.username, "/movies/").concat(Title), {
       method: "POST",
       headers: {
         Authorization: "Bearer ".concat(storedToken),
@@ -52969,8 +52970,8 @@ var MovieView = function MovieView(_ref) {
       }
     });
   };
-  var removeFavoriteMovie = function removeFavoriteMovie() {
-    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username, "/movies/").concat(Title), {
+  var removeFavoriteMovie = function removeFavoriteMovie(Title) {
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(storedUser.username, "/movies/").concat(Title), {
       method: "DELETE",
       headers: {
         Authorization: "Bearer ".concat(storedToken),
@@ -52988,7 +52989,7 @@ var MovieView = function MovieView(_ref) {
       }
     });
   };
-  var movieAdded = function movieAdded() {
+  var movieAdded = function movieAdded(Title) {
     var hasMovie = userFavoriteMovies.some(function (m) {
       return m.Title === Title;
     });
@@ -52996,7 +52997,7 @@ var MovieView = function MovieView(_ref) {
       setMovieExists(true);
     }
   };
-  var movieRemoved = function movieRemoved() {
+  var movieRemoved = function movieRemoved(Title) {
     var hasMovie = userFavoriteMovies.some(function (m) {
       return m.Title === Title;
     });
@@ -53035,11 +53036,11 @@ var MovieView = function MovieView(_ref) {
     size: "lg"
   }, "Back"))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "button-add-favorite",
-    onClick: addFavoriteMovies,
+    onClick: addFavoriteMovies(Title),
     disabled: movieExists
   }, "Add to Favorites"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     variant: "primary",
-    onClick: removeFavoriteMovie,
+    onClick: removeFavoriteMovie(Title),
     disabled: disableRemove
   }, "Remove from Favorites")))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement("h2", {
     className: "mt-0"
@@ -53479,7 +53480,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.FavMovies = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactBootstrap = require("react-bootstrap");
-var _movieView = require("../movie-view/movie-view");
+var _movieCard = require("../movie-card/movie-card");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -53495,8 +53496,8 @@ var FavMovies = function FavMovies(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     user = _useState2[0],
     setUser = _useState2[1];
-  var favoriteMovies = movies.filter(function (m) {
-    return user.favoriteMovies.includes(m._id);
+  var favoriteMovies = movies.filter(function (movie) {
+    return user.FavoriteMovies.includes(movie.Title);
   });
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "h-100",
@@ -53508,18 +53509,18 @@ var FavMovies = function FavMovies(_ref) {
   }, "List of favorite Movies"), favoriteMovies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
       className: "mb-5",
-      key: movie._id,
+      key: movie.Title,
       xs: 12,
       sm: 6,
       md: 4,
       lg: 3
-    }, /*#__PURE__*/_react.default.createElement(_movieView.MovieView, {
+    }, /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
       movie: movie
     }));
   })))));
 };
 exports.FavMovies = FavMovies;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../movie-view/movie-view":"components/movie-view/movie-view.jsx"}],"components/profile-view/user-info.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/profile-view/user-info.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53626,7 +53627,7 @@ var MainView = function MainView() {
     }
     fetch("https://movieapi-dcj2.onrender.com/movies", {
       headers: {
-        Authorization: 'Bearer ${token}'
+        Authorization: "Bearer ".concat(token)
       }
     }).then(function (response) {
       return response.json();
@@ -53805,7 +53806,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53914" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56839" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
