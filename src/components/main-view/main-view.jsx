@@ -14,6 +14,7 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     const [user, setUser] = useState(storedUser? storedUser : null);
     const [token, setToken] = useState(storedToken? storedToken: null);
+    const [FavoriteMovies] = useState([]);
 
     useEffect(() => {
       if (!token) {
@@ -88,7 +89,11 @@ export const MainView = () => {
                       </Col>
                     ) : (
                       <Col md={8}>
-                        <MovieView movies={movies} username={user.Username} favoriteMovies={user.favoriteMovies}/>
+                        <MovieView 
+                          movies={movies} 
+                          username={user.Username} 
+                          favoriteMovies={user.FavoriteMovies}
+                        />
                       </Col>
                     )
                   }
