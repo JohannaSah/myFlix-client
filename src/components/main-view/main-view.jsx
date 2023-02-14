@@ -21,7 +21,7 @@ export const MainView = () => {
         return;
       }
       fetch("https://movieapi-dcj2.onrender.com/movies", {
-        headers: { Authorization: 'Bearer ${token}'}
+        headers: { Authorization: `Bearer ${token}`}
       })
       .then((response) => response.json())
       .then((movies) => {
