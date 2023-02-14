@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Row, Col, Container, Card } from "react-bootstrap";
-import { MovieView } from '../movie-view/movie-view';
+import { MovieCard } from '../movie-card/movie-card';
 
 export const FavMovies = ({ movies, storedUser }) => {
     const [user, setUser] = useState(storedUser ? storedUser : null);
-    let favoriteMovies = movies.filter((m) => 
-        user.favoriteMovies.includes(m._id)
+    let favoriteMovies = movies.filter((movie) => 
+        user.FavoriteMovies.includes(movie.Title)
     );
 
     return (
@@ -24,8 +24,8 @@ export const FavMovies = ({ movies, storedUser }) => {
                                 List of favorite Movies
                             </Card.Title>
                             {favoriteMovies.map((movie) => (
-                                <Col className="mb-5" key={movie._id} xs={12} sm={6} md={4} lg={3}>
-                                    <MovieView
+                                <Col className="mb-5" key={movie.Title} xs={12} sm={6} md={4} lg={3}>
+                                    <MovieCard
                                         movie={movie}
                                     />
                                 </Col>

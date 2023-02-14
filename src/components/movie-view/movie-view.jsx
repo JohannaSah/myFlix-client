@@ -10,6 +10,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     const { Title } = useParams();
     const movie = movies.find((movie) => movie.Title === Title ); 
     const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem('token');
     const [movieExists, setMovieExists] = useState(false);
     const [disableRemove, setDisableRemove] = useState(true);
     const [userFavoriteMovies, setUserFavoriteMovies] = useState(storedUser.FavoriteMovies ? storedUser.FavoriteMovies: FavoriteMovies);
@@ -19,8 +20,8 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
              Name == movie.Genre.Name && Title != movie.Title
     );
 
-    const addFavoriteMovies = () => {
-        fetch(`https://movieapi-dcj2.onrender.com/users/${username}/movies/${Title}`,
+    const addFavoriteMovies = (Title) => {
+        fetch(`https://movieapi-dcj2.onrender.com/users/${storedUser.username}/movies/${Title}`,
         {
             method: "POST",
             headers: {
@@ -42,8 +43,8 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         });
     };
 
-    const removeFavoriteMovie = () => {
-        fetch (`https://movieapi-dcj2.onrender.com/users/${username}/movies/${Title}`,
+    const removeFavoriteMovie = (Title) => {
+        fetch (`https://movieapi-dcj2.onrender.com/users/${storedUser.username}/movies/${Title}`,
         {
             method: "DELETE",
             headers: {
@@ -64,7 +65,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         });
     };
 
-    const movieAdded = () => {
+    const movieAdded = (Title) => {
         const hasMovie = userFavoriteMovies.some((m) => m.Title === Title);
 
         if (hasMovie) {
@@ -72,7 +73,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         }
     };
 
-    const movieRemoved = () => {
+    const movieRemoved = (Title) => {
         const hasMovie = userFavoriteMovies.some((m) => m.Title === Title);
 
         if (hasMovie) {
@@ -140,14 +141,14 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                     <Col>
                                         <Button
                                             className="button-add-favorite"
-                                            onClick={addFavoriteMovies}
+                                            onClick={addFavoriteMovies(Title)}
                                             disabled={movieExists}
                                         >
                                             Add to Favorites
                                         </Button>
                                         <Button
                                             variant="primary"
-                                            onClick={removeFavoriteMovie}
+                                            onClick={removeFavoriteMovie(Title)}
                                             disabled={disableRemove}
                                         >
                                             Remove from Favorites
