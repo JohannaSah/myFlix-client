@@ -20,7 +20,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     );
 
     const addFavoriteMovies = () => {
-        fetch(`https://movieapi-dcj2.onrender.com/users/${username}/movies/${movieId}`,
+        fetch(`https://movieapi-dcj2.onrender.com/users/${username}/movies/${Title}`,
         {
             method: "POST",
             headers: {
@@ -43,7 +43,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     };
 
     const removeFavoriteMovie = () => {
-        fetch (`https://movieapi-dcj2.onrender.com/users/${username}/movies/${movieId}`,
+        fetch (`https://movieapi-dcj2.onrender.com/users/${username}/movies/${Title}`,
         {
             method: "DELETE",
             headers: {
@@ -65,14 +65,14 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     };
 
     const movieAdded = () => {
-        const hasMovie = userFavoriteMovies.some((m) => m._id === movieId)
+        const hasMovie = userFavoriteMovies.some((m) => m.Title === Title)
         if (hasMovie) {
             setMovieExists(true)
         }
     };
 
     const movieRemoved = () => {
-        const hasMovie = userFavoriteMovies.some((m) => m._id === movieId)
+        const hasMovie = userFavoriteMovies.some((m) => m.Title === Title)
         if (hasMovie) {
             setDisableRemove(false)
         }
@@ -162,7 +162,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                             </h2>
                             <hr />
                             {similarMovies.map((movie) => (
-                                <Col className='mb-5' key={movie.id} xs={12} sm={6} md={4} lg={3}>
+                                <Col className='mb-5' key={movie.Title} xs={12} sm={6} md={4} lg={3}>
                                     <MovieCard
                                         movie={movie}
                                     />
