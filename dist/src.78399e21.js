@@ -52949,8 +52949,8 @@ var MovieView = function MovieView(_ref) {
       Title = _ref2.Title;
     return Name == movie.Genre.Name && Title != movie.Title;
   });
-  var addFavoriteMovies = function addFavoriteMovies(Title) {
-    fetch("https://movieapi-dcj2.onrender.com/users/".concat(storedUser.username, "/movies/").concat(Title), {
+  var addFavoriteMovies = function addFavoriteMovies(_id) {
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(storedUser.username, "/movies/").concat(_id), {
       method: "POST",
       headers: {
         Authorization: "Bearer ".concat(storedToken),
@@ -52970,8 +52970,8 @@ var MovieView = function MovieView(_ref) {
       }
     });
   };
-  var removeFavoriteMovie = function removeFavoriteMovie(Title) {
-    fetch("https://movieapi-dcj2.onrender.com/users/".concat(storedUser.username, "/movies/").concat(Title), {
+  var removeFavoriteMovie = function removeFavoriteMovie(_id) {
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(storedUser.username, "/movies/").concat(_id), {
       method: "DELETE",
       headers: {
         Authorization: "Bearer ".concat(storedToken),
@@ -52989,17 +52989,17 @@ var MovieView = function MovieView(_ref) {
       }
     });
   };
-  var movieAdded = function movieAdded(Title) {
+  var movieAdded = function movieAdded(_id) {
     var hasMovie = userFavoriteMovies.some(function (m) {
-      return m.Title === Title;
+      return m._id === _id;
     });
     if (hasMovie) {
       setMovieExists(true);
     }
   };
-  var movieRemoved = function movieRemoved(Title) {
+  var movieRemoved = function movieRemoved(_id) {
     var hasMovie = userFavoriteMovies.some(function (m) {
-      return m.Title === Title;
+      return m._id === _id;
     });
     if (hasMovie) {
       setDisableRemove(false);
@@ -53036,18 +53036,22 @@ var MovieView = function MovieView(_ref) {
     size: "lg"
   }, "Back"))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "button-add-favorite",
-    onClick: addFavoriteMovies(Title),
+    onClick: function onClick() {
+      return addFavoriteMovies(_id);
+    },
     disabled: movieExists
   }, "Add to Favorites"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     variant: "primary",
-    onClick: removeFavoriteMovie(Title),
+    onClick: function onClick() {
+      return removeFavoriteMovie(_id);
+    },
     disabled: disableRemove
   }, "Remove from Favorites")))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement("h2", {
     className: "mt-0"
   }, "Similar movies"), /*#__PURE__*/_react.default.createElement("hr", null), similarMovies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
       className: "mb-5",
-      key: movie.Title,
+      key: movie._id,
       xs: 12,
       sm: 6,
       md: 4,
@@ -53497,7 +53501,7 @@ var FavMovies = function FavMovies(_ref) {
     user = _useState2[0],
     setUser = _useState2[1];
   var favoriteMovies = movies.filter(function (movie) {
-    return user.FavoriteMovies.includes(movie.Title);
+    return user.FavoriteMovies.includes(movie._id);
   });
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "h-100",
@@ -53509,7 +53513,7 @@ var FavMovies = function FavMovies(_ref) {
   }, "List of favorite Movies"), favoriteMovies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
       className: "mb-5",
-      key: movie.Title,
+      key: movie._id,
       xs: 12,
       sm: 6,
       md: 4,
