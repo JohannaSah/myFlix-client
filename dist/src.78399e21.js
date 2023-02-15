@@ -53037,13 +53037,13 @@ var MovieView = function MovieView(_ref) {
   }, "Back"))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "button-add-favorite",
     onClick: function onClick() {
-      return addFavoriteMovies(_id);
+      return addFavoriteMovies(movie._id);
     },
     disabled: movieExists
   }, "Add to Favorites"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     variant: "primary",
     onClick: function onClick() {
-      return removeFavoriteMovie(_id);
+      return removeFavoriteMovie(movie._id);
     },
     disabled: disableRemove
   }, "Remove from Favorites")))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement("h2", {
@@ -53373,14 +53373,16 @@ var UpdateForm = function UpdateForm(_ref) {
     birthday = _useState12[0],
     setBirthday = _useState12[1];
   var updateUser = function updateUser(username) {
-    fetch("https://myplix.herokuapp.com/users/".concat(username), {
-      method: "GET",
+    fetch("https://movieapi-dcj2.onrender.com/".concat(username), {
+      method: "PUT",
       headers: {
         Authorization: "Bearer ".concat(token)
-      }
+      },
+      body: formData
     }).then(function (response) {
       return response.json();
-    }).then(function (updateUser) {
+    }).then(function (updatedUser) {
+      console.log("Success: ", updatedUser);
       if (updatedUser) {
         setUser(updatedUser);
         localStorage.setItem("user", JSON.stringify(updatedUser));
@@ -53398,7 +53400,7 @@ var UpdateForm = function UpdateForm(_ref) {
       Email: email,
       Birthday: birthday
     };
-    fetch("https://myplix.herokuapp.com/users/".concat(storedUser.Username), {
+    fetch("https://movieapi-dcj2.onrender.com/".concat(storedUser.Username), {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
@@ -53501,7 +53503,7 @@ var FavMovies = function FavMovies(_ref) {
     user = _useState2[0],
     setUser = _useState2[1];
   var favoriteMovies = movies.filter(function (movie) {
-    return user.FavoriteMovies.includes(movie._id);
+    return user.FavoriteMovies && user.FavoriteMovies.includes(movie._id);
   });
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "h-100",
@@ -53689,7 +53691,8 @@ var MainView = function MainView() {
       md: 8
     }, /*#__PURE__*/_react.default.createElement(_profileView.ProfileView, {
       user: user,
-      movies: movies
+      movies: movies,
+      favoriteMovies: user.FavoriteMovies
     })))
   }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/",
@@ -53810,7 +53813,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58715" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61451" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
