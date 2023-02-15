@@ -13,11 +13,13 @@ export const UpdateForm =({ storedToken, storedUser}) => {
     const [birthday, setBirthday] = useState(user.Birthday);
 
     const updateUser = (username) => {
-        fetch(`https://myplix.herokuapp.com/users/${username}`, {
-            method: "GET",
+        fetch(`https://movieapi-dcj2.onrender.com/${username}`, {
+            method: "PUT",
             headers: { Authorization: `Bearer ${token}`},
+            body: formData
         }).then(response => response.json())
-        .then((updateUser) => {
+        .then((updatedUser) => {
+            console.log("Success: ", updatedUser);
             if (updatedUser) {
                 setUser(updatedUser);
                 localStorage.setItem("user", JSON.stringify(updatedUser));
@@ -35,10 +37,10 @@ export const UpdateForm =({ storedToken, storedUser}) => {
             Username: username,
             Password: password,
             Email: email,
-            Birthday: birthday,
+            Birthday: birthday
         };
         fetch(
-            `https://myplix.herokuapp.com/users/${storedUser.Username}`,
+            `https://movieapi-dcj2.onrender.com/${storedUser.Username}`,
             {
                 method: "PUT",
                 body: JSON.stringify(data),

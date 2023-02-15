@@ -141,14 +141,14 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                     <Col>
                                         <Button
                                             className="button-add-favorite"
-                                            onClick={() => addFavoriteMovies(_id)}
+                                            onClick={() => addFavoriteMovies(movie._id)}
                                             disabled={movieExists}
                                         >
                                             Add to Favorites
                                         </Button>
                                         <Button
                                             variant="primary"
-                                            onClick={() => removeFavoriteMovie(_id)}
+                                            onClick={() => removeFavoriteMovie(movie._id)}
                                             disabled={disableRemove}
                                         >
                                             Remove from Favorites
