@@ -20,8 +20,8 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
              Name == movie.Genre.Name && Title != movie.Title
     );
 
-    const addFavoriteMovies = (Title) => {
-        fetch(`https://movieapi-dcj2.onrender.com/users/${storedUser.username}/movies/${Title}`,
+    const addFavoriteMovies = (_id) => {
+        fetch(`https://movieapi-dcj2.onrender.com/users/${storedUser.username}/movies/${_id}`,
         {
             method: "POST",
             headers: {
@@ -43,8 +43,8 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         });
     };
 
-    const removeFavoriteMovie = (Title) => {
-        fetch (`https://movieapi-dcj2.onrender.com/users/${storedUser.username}/movies/${Title}`,
+    const removeFavoriteMovie = (_id) => {
+        fetch (`https://movieapi-dcj2.onrender.com/users/${storedUser.username}/movies/${_id}`,
         {
             method: "DELETE",
             headers: {
@@ -65,16 +65,16 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         });
     };
 
-    const movieAdded = (Title) => {
-        const hasMovie = userFavoriteMovies.some((m) => m.Title === Title);
+    const movieAdded = (_id) => {
+        const hasMovie = userFavoriteMovies.some((m) => m._id === _id);
 
         if (hasMovie) {
             setMovieExists(true)
         }
     };
 
-    const movieRemoved = (Title) => {
-        const hasMovie = userFavoriteMovies.some((m) => m.Title === Title);
+    const movieRemoved = (_id) => {
+        const hasMovie = userFavoriteMovies.some((m) => m._id === _id);
 
         if (hasMovie) {
             setDisableRemove(false)
@@ -141,14 +141,14 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                     <Col>
                                         <Button
                                             className="button-add-favorite"
-                                            onClick={addFavoriteMovies(Title)}
+                                            onClick={() => addFavoriteMovies(_id)}
                                             disabled={movieExists}
                                         >
                                             Add to Favorites
                                         </Button>
                                         <Button
                                             variant="primary"
-                                            onClick={removeFavoriteMovie(Title)}
+                                            onClick={() => removeFavoriteMovie(_id)}
                                             disabled={disableRemove}
                                         >
                                             Remove from Favorites
@@ -165,7 +165,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                             </h2>
                             <hr />
                             {similarMovies.map((movie) => (
-                                <Col className='mb-5' key={movie.Title} xs={12} sm={6} md={4} lg={3}>
+                                <Col className='mb-5' key={movie._id} xs={12} sm={6} md={4} lg={3}>
                                     <MovieCard
                                         movie={movie}
                                     />
