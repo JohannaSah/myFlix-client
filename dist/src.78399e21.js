@@ -53692,7 +53692,7 @@ var MainView = function MainView() {
     element: /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !user ? /*#__PURE__*/_react.default.createElement(_reactRouterDom.Navigate, {
       to: "/login",
       replace: true
-    }) : movies.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, "This list is empty!") : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, movies.map(function (movie) {
+    }) : movies && movies.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, "This list is empty!") : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, movies.map(function (movie) {
       return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
         className: "mb-4",
         key: movie._id,
@@ -53806,7 +53806,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56839" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58715" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
