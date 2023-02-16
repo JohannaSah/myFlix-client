@@ -9,18 +9,19 @@ export const MovieCard = ({movie}) => {
                 className="h-100 movieCard"
 
             >
+                <Row className='mb-4'>
+                    <Col 
+                        className='text-center mt-3'
+                    >
+                    <Card.Img 
+                        variant="top" 
+                        src={movie.imageUrl}
+                        className='img-fluid h-100 w-auto movie-card-img'
+                    />
+                    </Col>
+                </Row>
                 <Card.Body>
-                    <Row className='mb-4'>
-                        <Col 
-                            className='text-center mt-3'
-                        >
-                        <Card.Img 
-                            variant="top" 
-                            src={movie.imageUrl}
-                            className='img-fluid h-100 w-auto movie-card-img'
-                        />
-                        </Col>
-                    </Row>
+                    
                     <Card.Title>
                         {movie.Title}
                     </Card.Title>
