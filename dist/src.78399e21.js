@@ -53520,11 +53520,11 @@ var FavMovies = function FavMovies(_ref) {
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "h-100 mb-4",
     bg: "light"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, favoriteMovies.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
-    className: "d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, "Favorite Movies")) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, favoriteMovies.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
     className: "text-start h4 mb-4"
-  }, "List of favorite Movies"), favoriteMovies.map(function (movie) {
+  }, "Favorite Movies"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, "You have not added any favorite movies yet")) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
+    className: "text-start h4 mb-4"
+  }, "Favorite Movies"), favoriteMovies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
       className: "mb-5",
       key: movie._id
