@@ -52869,15 +52869,15 @@ var MovieCard = function MovieCard(_ref) {
   var movie = _ref.movie;
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "h-100 movieCard"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
-    className: "h-50 mb-4"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "mb-4"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
-    className: "h-100 text-center mt-3"
+    className: "text-center mt-3"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Img, {
     variant: "top",
     src: movie.imageUrl,
     className: "img-fluid h-100 w-auto movie-card-img"
-  }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, movie.Description), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+  }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, movie.Title), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, movie.Description), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
     className: "d-flex flex-row justify-content-between align-items-baseline mt-auto"
   }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/movies/".concat(encodeURIComponent(movie.Title))
