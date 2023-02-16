@@ -21,7 +21,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     );
 
     const addFavoriteMovies = (_id) => {
-        fetch(`https://movieapi-dcj2.onrender.com/users/${storedUser.username}/movies/${_id}`,
+        fetch(`https://movieapi-dcj2.onrender.com/users/${storedUser.Username}/movies/${_id}`,
         {
             method: "POST",
             headers: {
@@ -44,7 +44,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     };
 
     const removeFavoriteMovie = (_id) => {
-        fetch (`https://movieapi-dcj2.onrender.com/users/${storedUser.username}/movies/${_id}`,
+        fetch (`https://movieapi-dcj2.onrender.com/users/${storedUser.Username}/movies/${_id}`,
         {
             method: "DELETE",
             headers: {

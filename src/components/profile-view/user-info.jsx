@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { Row, Col, Container, Card } from "react-bootstrap";
 
 
@@ -26,7 +27,7 @@ export const UserInfo = ({user}) => {
                     <Row className="d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3">
                         <Col>
                             <span>Birthday: </span>
-                            <span className="fw-bolder">{user.Birthday}</span>
+                            <span className="fw-bolder">{moment(user.Birthday).format("YYYY-MM-DD")}</span>
                         </Col>
                     </Row>
                 </Card.Body>

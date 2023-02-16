@@ -4,6 +4,7 @@ import { MovieCard } from '../movie-card/movie-card';
 
 export const FavMovies = ({ movies, storedUser }) => {
     const [user, setUser] = useState(storedUser ? storedUser : null);
+    console.log(user, movies);
     let favoriteMovies = movies.filter((movie) => 
         user.FavoriteMovies && user.FavoriteMovies.includes(movie._id)
     );
@@ -19,7 +20,7 @@ export const FavMovies = ({ movies, storedUser }) => {
                         </Card.Title>
                     </Col>
                     ) : (
-                        <>
+                        <Card>
                             <Card.Title className="text-start h4 mb-4">
                                 List of favorite Movies
                             </Card.Title>
@@ -30,7 +31,7 @@ export const FavMovies = ({ movies, storedUser }) => {
                                     />
                                 </Col>
                             ))}
-                        </>
+                        </Card>
                     )}
                 </Row>
             </Card>
