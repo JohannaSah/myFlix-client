@@ -96,82 +96,81 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                 </Col>
             ) : (
                 <>
-                    <Card> 
-                        <Row className='d-flex flex-row-reverse p-3'>
-                            <Col md={5} className='text-center text-md-end'>
-                            <Card.Img
-                                src={movie.imageUrl}
-                                alt={`Poster for ${movie.Title}`}
-                                className='img-fluid h-100 w-auto movie-view-img'
-                            />
-                            </Col>
-                            <Col md={7} className='d-flex flex-column'>
-                                <Row className='d-flex flex-row  justify-content-between'>
-                                    <Col md={9} className='d-flex flex-column'>
-                                        <Card.Body>
-                                            <Card.Title>
-                                                {movie.Title}
-                                            </Card.Title>
-                                            <Card.Text>
-                                                <Row>
-                                                    <Col>Director: </Col>
-                                                    <Col>{movie.Director.Name}</Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col>Genre:</Col>
-                                                    <Col>{movie.Genre.Name}</Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col>Description:</Col>
-                                                    <Col>{movie.Description}</Col>
-                                                </Row>
-                                            </Card.Text>
-                                            
-                                        </Card.Body>
-                                    </Col>
-                                </Row>
-                                <Row className='d-flex flex-row justify-content-between mt-auto mb-md-4'>
-                                    <Col>
-                                        <Link to={`/`}>
-                                            <Button variant='secondary' size='lg'>
-                                                Back
-                                            </Button>
-                                        </Link>
-                                    </Col>
-                                    <Col>
-                                        <Button
-                                            className="button-add-favorite"
-                                            onClick={() => addFavoriteMovies(movie._id)}
-                                            disabled={movieExists}
-                                        >
-                                            Add to Favorites
-                                        </Button>
-                                        <Button
-                                            variant="primary"
-                                            onClick={() => removeFavoriteMovie(movie._id)}
-                                            disabled={disableRemove}
-                                        >
-                                            Remove from Favorites
-                                        </Button>
-                                    </Col>
-                                </Row>                                
+                    <Card 
+                        className="h-100 movieView mb-4"
+                    > 
+                        <Row className='h-100 mb-4 movieViewImage'>
+                            <Col 
+                                className='h-100 text-center mt-3'
+                            >
+                                <Card.Img 
+                                    variant="top" 
+                                    src={movie.imageUrl}
+                                    className='img-fluid h-100 w-auto movie-card-img'
+                                />
                             </Col>
                         </Row>
+                        <Card.Body className="mb-4">
+                            <Card.Title className="mb-4 movieViewTitle">
+                                {movie.Title}
+                            </Card.Title>
+                            <Card.Text className="mb-4">
+                                <Row className="mb-4 movieViewDescription">
+                                    <Col>{movie.Description}</Col>
+                                </Row>
+                                <Row className="movieViewDirector">
+                                    <Col>Director: </Col>
+                                    <Col>{movie.Director.Name}</Col>
+                                </Row>
+                                <Row className="mb-4 movieViewGenre">
+                                    <Col>Genre:</Col>
+                                    <Col>{movie.Genre.Name}</Col>
+                                </Row>
+                            </Card.Text>
+                            <Row className="mb-4 movieViewButtons">
+                                <Col>
+                                    <Button
+                                        className="button-add-favorite"
+                                        onClick={() => addFavoriteMovies(movie._id)}
+                                        disabled={movieExists}
+                                    >
+                                        Add to Favorites
+                                    </Button>
+                                </Col>
+                                <Col>
+                                    <Button
+                                        variant="primary"
+                                        onClick={() => removeFavoriteMovie(movie._id)}
+                                        disabled={disableRemove}
+                                    >
+                                        Remove from Favorites
+                                    </Button>
+                                </Col>
+                                <Col>
+                                    <Link to={`/`}>
+                                        <Button variant='primary'>
+                                            Back
+                                        </Button>
+                                    </Link>
+                                </Col>
+                            </Row>
+                        </Card.Body>                          
                     </Card>
                     <Card>
-                        <Row>
-                            <h2 className='mt-0'>
-                                Similar movies
-                            </h2>
-                            <hr />
-                            {similarMovies.map((movie) => (
-                                <Col className='mb-5' key={movie._id} xs={12} sm={6} md={4} lg={3}>
-                                    <MovieCard
-                                        movie={movie}
-                                    />
-                                </Col>
-                            ))}
-                        </Row>
+                        <Card.Body>
+                            <Card.Title className='mb-4'>
+                                Similar Movies
+                            </Card.Title>
+                            <Card.Text>
+                                {similarMovies.map((movie) => (
+                                    <Col className='mb-4' key={movie.Title}>
+                                        <MovieCard
+                                            movie={movie}
+                                        />
+                                    </Col>
+                                ))}
+                            </Card.Text>
+                        </Card.Body>                        
                     </Card>
                 </>
                 
