@@ -52870,7 +52870,7 @@ var MovieCard = function MovieCard(_ref) {
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "h-100 movieCard"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
-    className: "h-50"
+    className: "h-50 mb-4"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
     className: "h-100 text-center mt-3"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Img, {
