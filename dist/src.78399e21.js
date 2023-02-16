@@ -53437,8 +53437,8 @@ var UpdateForm = function UpdateForm(_ref) {
     className: "mb-4 mt-4 ml-4 mr-4",
     bg: "light"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
-    className: "mb-4 mt-1 ml-4 mr-4"
-  }, "Update Info"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
+    className: "mb-4 mt-1 ml-4 mr-4 fw-bolder"
+  }, "Update Your Info"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
     className: "profile-form mb-4 ml-4 mr-4",
     onSubmit: function onSubmit(e) {
       return handleSubmit(e);
@@ -53521,9 +53521,9 @@ var FavMovies = function FavMovies(_ref) {
     className: "h-100 mb-4",
     bg: "light"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, favoriteMovies.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
-    className: "text-start h4 mb-4"
+    className: "text-start h4 mb-4 fw-bolder"
   }, "Favorite Movies"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, "You have not added any favorite movies yet")) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
-    className: "text-start h4 mb-4"
+    className: "text-start h4 mb-4 fw-bolder"
   }, "Favorite Movies"), favoriteMovies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
       className: "mb-5",
@@ -59238,9 +59238,9 @@ var UserInfo = function UserInfo(_ref) {
   var user = _ref.user;
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     bg: "light",
-    className: "mb-4 mt-4 ml-4 mr-4"
+    className: "mb-4 mt-4 ml-4 mr-4 "
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
-    className: "mb-4 mt-2 ml-4 mr-4"
+    className: "mb-4 mt-2 ml-4 mr-4 fw-bolder"
   }, "Your Profile"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
     className: "mb-4 ml-4 mr-4"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement("span", null, "Username: "), /*#__PURE__*/_react.default.createElement("span", {
