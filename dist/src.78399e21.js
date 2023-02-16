@@ -53046,11 +53046,9 @@ var MovieView = function MovieView(_ref) {
       return removeFavoriteMovie(movie._id);
     },
     disabled: disableRemove
-  }, "Remove from Favorites")), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
-    variant: "primary"
-  }, "Back")))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
+  }, "Remove from Favorites"))))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
+    className: "mb-4"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
     className: "mb-4"
   }, "Similar Movies"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Text, null, similarMovies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
@@ -53520,7 +53518,7 @@ var FavMovies = function FavMovies(_ref) {
     return user.FavoriteMovies && user.FavoriteMovies.includes(movie._id);
   });
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
-    className: "h-100",
+    className: "h-100 mb-4",
     bg: "light"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, favoriteMovies.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
     className: "d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3"
@@ -53529,11 +53527,7 @@ var FavMovies = function FavMovies(_ref) {
   }, "List of favorite Movies"), favoriteMovies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
       className: "mb-5",
-      key: movie._id,
-      xs: 12,
-      sm: 6,
-      md: 4,
-      lg: 3
+      key: movie._id
     }, /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
       movie: movie
     }));
