@@ -11,7 +11,7 @@ export const FavMovies = ({ movies, storedUser }) => {
 
     return (
         <Container>
-            <Card className="h-100" bg="light">
+            <Card className="h-100 mb-4" bg="light">
                 <Card.Body>
                     <Row>
                         {favoriteMovies.length === 0 ? (
@@ -26,7 +26,7 @@ export const FavMovies = ({ movies, storedUser }) => {
                                     List of favorite Movies
                                 </Card.Title>
                                 {favoriteMovies.map((movie) => (
-                                    <Col className="mb-5" key={movie._id} xs={12} sm={6} md={4} lg={3}>
+                                    <Col className="mb-5" key={movie._id}>
                                         <MovieCard
                                             movie={movie}
                                         />
@@ -37,6 +37,7 @@ export const FavMovies = ({ movies, storedUser }) => {
                     </Row>
                 </Card.Body>                
             </Card>
+
         </Container>
     );
 };
