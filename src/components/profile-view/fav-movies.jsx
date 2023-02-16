@@ -14,16 +14,19 @@ export const FavMovies = ({ movies, storedUser }) => {
             <Card className="h-100 mb-4" bg="light">
                 <Card.Body>
                     <Row>
-                        {favoriteMovies.length === 0 ? (
-                        <Col className="d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3">
-                            <Card.Title>
+                        {favoriteMovies.length === 0 ? ( 
+                            <Card.Body>
+                                <Card.Title className="text-start h4 mb-4">
                                 Favorite Movies
-                            </Card.Title>
-                        </Col>
+                                </Card.Title>
+                                <Card.Text>
+                                    You have not added any favorite movies yet
+                                </Card.Text>
+                            </Card.Body>
                         ) : (
                             <>
                                 <Card.Title className="text-start h4 mb-4">
-                                    List of favorite Movies
+                                    Favorite Movies
                                 </Card.Title>
                                 {favoriteMovies.map((movie) => (
                                     <Col className="mb-5" key={movie._id}>
