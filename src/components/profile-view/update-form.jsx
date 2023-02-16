@@ -81,7 +81,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                             placeholder="Enter a username" 
                         />
                     </Form.Group>
-                    <Form.Group className="mb-3">
+                    {/* <Form.Group className="mb-3">
                         <Form.Label>Password: </Form.Label>
                         <Form.Control
                             type="password"
@@ -91,7 +91,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                             minLength="8"
                             placeholder="Password must be 8 or more characters" 
                         />
-                    </Form.Group>
+                    </Form.Group> */}
                     <Form.Group className="mb-3">
                         <Form.Label>E-mail: </Form.Label>
                         <Form.Control
