@@ -7,24 +7,24 @@ export const UserInfo = ({user}) => {
 
     return (
         <Container>
-            <Card bg="light" className="mb-4">
-                <Card.Title className="d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3">
-                    Your Profile
-                </Card.Title>
+            <Card bg="light" className="mb-4 mt-4 ml-4 mr-4">
                 <Card.Body>
-                    <Row className="d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3">
+                    <Card.Title className="mb-4 mt-2 ml-4 mr-4">
+                        Your Profile
+                    </Card.Title>
+                    <Row className="mb-4 ml-4 mr-4">
                         <Col>
                             <span>Username: </span>
                             <span className="fw-bolder">{user.Username}</span>
                         </Col>
                     </Row>
-                    <Row className="d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3">
+                    <Row className="mb-4 ml-4 mr-4">
                         <Col>
                             <span>Email: </span>
                             <span className="fw-bolder">{user.Email}</span>
                         </Col>
                     </Row>
-                    <Row className="d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3">
+                    <Row className="mb-4 ml-4 mr-43">
                         <Col>
                             <span>Birthday: </span>
                             <span className="fw-bolder">{moment(user.Birthday).format("YYYY-MM-DD")}</span>
