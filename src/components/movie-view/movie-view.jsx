@@ -146,17 +146,10 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                         Remove from Favorites
                                     </Button>
                                 </Col>
-                                <Col>
-                                    <Link to={`/`}>
-                                        <Button variant='primary'>
-                                            Back
-                                        </Button>
-                                    </Link>
-                                </Col>
                             </Row>
                         </Card.Body>                          
                     </Card>
-                    <Card>
+                    <Card className="mb-4">
                         <Card.Body>
                             <Card.Title className='mb-4'>
                                 Similar Movies
@@ -173,7 +166,6 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                         </Card.Body>                        
                     </Card>
                 </>
-                
             )}
         </Container>
     )
