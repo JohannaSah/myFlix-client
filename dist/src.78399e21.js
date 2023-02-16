@@ -53418,11 +53418,28 @@ var UpdateForm = function UpdateForm(_ref) {
       console.log(error);
     });
   };
+  var handleDeleteUser = function handleDeleteUser(username) {
+    fetch("https://movieapi-dcj2.onrender.com/".concat(username), {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer ".concat(token),
+        "Content-Type": application / json
+      }
+    }).then(function (response) {
+      if (response.ok) {
+        alert("User was successfully deleted");
+        localStorage.clear();
+        window.location.reload();
+      } else {
+        alert("User was not deleted");
+      }
+    });
+  };
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "mb-4 mt-4 ml-4 mr-4",
     bg: "light"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
-    className: "mb-4 mt-4 ml-4 mr-4"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
+    className: "mb-4 mt-1 ml-4 mr-4"
   }, "Update Info"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
     className: "profile-form mb-4 ml-4 mr-4",
     onSubmit: function onSubmit(e) {
@@ -53461,7 +53478,14 @@ var UpdateForm = function UpdateForm(_ref) {
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     variant: "primary",
     type: "submit"
-  }, "Save Changes"))));
+  }, "Save Changes"))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+    onClick: function onClick() {
+      return handleDeleteUser(user._id);
+    },
+    className: "button-delete mt-3",
+    type: "submit",
+    variant: "danger"
+  }, "Delete Account")));
 };
 exports.UpdateForm = UpdateForm;
 var _default = UpdateForm;
@@ -53498,9 +53522,9 @@ var FavMovies = function FavMovies(_ref) {
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "h-100",
     bg: "light"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, favoriteMovies.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, favoriteMovies.length === 0 ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
     className: "d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, "Favorite Movies")) : /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, null, "Favorite Movies")) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
     className: "text-start h4 mb-4"
   }, "List of favorite Movies"), favoriteMovies.map(function (movie) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
@@ -53513,7 +53537,7 @@ var FavMovies = function FavMovies(_ref) {
     }, /*#__PURE__*/_react.default.createElement(_movieCard.MovieCard, {
       movie: movie
     }));
-  })))));
+  }))))));
 };
 exports.FavMovies = FavMovies;
 },{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"../node_modules/moment/moment.js":[function(require,module,exports) {
@@ -59220,19 +59244,19 @@ var UserInfo = function UserInfo(_ref) {
   var user = _ref.user;
   return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     bg: "light",
-    className: "mb-4"
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
-    className: "d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3"
-  }, "Your Profile"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
-    className: "d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3"
+    className: "mb-4 mt-4 ml-4 mr-4"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Title, {
+    className: "mb-4 mt-2 ml-4 mr-4"
+  }, "Your Profile"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "mb-4 ml-4 mr-4"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement("span", null, "Username: "), /*#__PURE__*/_react.default.createElement("span", {
     className: "fw-bolder"
   }, user.Username))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
-    className: "d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3"
+    className: "mb-4 ml-4 mr-4"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement("span", null, "Email: "), /*#__PURE__*/_react.default.createElement("span", {
     className: "fw-bolder"
   }, user.Email))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
-    className: "d-flex flex-column flex-lg-row ms-2 text-lg-left mt-lg-3 mt-3"
+    className: "mb-4 ml-4 mr-43"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement("span", null, "Birthday: "), /*#__PURE__*/_react.default.createElement("span", {
     className: "fw-bolder"
   }, (0, _moment.default)(user.Birthday).format("YYYY-MM-DD")))))));
