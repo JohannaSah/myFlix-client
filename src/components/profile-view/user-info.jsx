@@ -7,9 +7,9 @@ export const UserInfo = ({user}) => {
 
     return (
         <Container>
-            <Card bg="light" className="mb-4 mt-4 ml-4 mr-4">
+            <Card bg="light" className="mb-4 mt-4 ml-4 mr-4 ">
                 <Card.Body>
-                    <Card.Title className="mb-4 mt-2 ml-4 mr-4">
+                    <Card.Title className="mb-4 mt-2 ml-4 mr-4 fw-bolder">
                         Your Profile
                     </Card.Title>
                     <Row className="mb-4 ml-4 mr-4">

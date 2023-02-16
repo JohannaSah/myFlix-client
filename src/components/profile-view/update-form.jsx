@@ -87,8 +87,8 @@ export const UpdateForm =({ storedToken, storedUser}) => {
         <Container>
             <Card className="mb-4 mt-4 ml-4 mr-4" bg="light">
                 <Card.Body>
-                    <Card.Title className="mb-4 mt-1 ml-4 mr-4">
-                        Update Info
+                    <Card.Title className="mb-4 mt-1 ml-4 mr-4 fw-bolder">
+                        Update Your Info
                     </Card.Title>
                     <Form className="profile-form mb-4 ml-4 mr-4" onSubmit={(e) => handleSubmit(e)}>
                         <Form.Group className="mb-3">
