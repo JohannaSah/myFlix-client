@@ -66,7 +66,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     };
 
     const movieAdded = (_id) => {
-        const hasMovie = userFavoriteMovies.some((m) => m._id === _id);
+        const hasMovie = userFavoriteMovies.includes((m) => m._id === _id);
 
         if (hasMovie) {
             setMovieExists(true)

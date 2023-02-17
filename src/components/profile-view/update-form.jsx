@@ -1,29 +1,36 @@
 import React from "react";
 import { useState } from "react";
 import { Form, Button, Card, Container } from "react-bootstrap";
+import moment from "moment";
 
 export const UpdateForm =({ storedToken, storedUser}) => {
 
     const [token, setToken] = useState(storedToken ? storedToken : null);
     const [user, setUser] = useState(storedUser ? storedUser : null);
-
     const [username, setUsername] = useState(user.Username);
-    const [password, setPassword] = useState(user.Password);
+    const [password, setPassword] = useState("");
     const [email, setEmail] = useState(user.Email);
-    const [birthday, setBirthday] = useState(user.Birthday);
+    const [birthday, setBirthday] = useState(moment(user.Birthday).format("YYYY-MM-DD"));
 
     const updateUser = (username) => {
-        fetch(`https://movieapi-dcj2.onrender.com/${username}`, {
+        const formData = {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
+        }
+        fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
             method: "PUT",
             headers: { Authorization: `Bearer ${token}`},
-            body: formData
+            body: JSON.stringify(formData)
         }).then(response => response.json())
         .then((updatedUser) => {
             console.log("Success: ", updatedUser);
             if (updatedUser) {
                 setUser(updatedUser);
-                localStorage.setItem("user", JSON.stringify(updatedUser));
-                window.location.reload();
+                window.alert('User info updated successfully')
+                localStorage.setItem('user', JSON.stringify(updatedUser))
+                window.location.reload()
             }
         })
         .catch((error) => {
@@ -32,35 +39,8 @@ export const UpdateForm =({ storedToken, storedUser}) => {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = {
-            Username: username,
-            Password: password,
-            Email: email,
-            Birthday: birthday
-        };
-        fetch(
-            `https://movieapi-dcj2.onrender.com/${storedUser.Username}`,
-            {
-                method: "PUT",
-                body: JSON.stringify(data),
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            }
-        )
-        .then((response) => {
-            if (response.ok) {
-                alert("Changes saved");
-                updateUser(username);
-            } else {
-                alert("Something went wrong");
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+        event.preventDefault(event);
+        updateUser(storedUser.Username)
     };
 
     const handleDeleteUser = (username) => {
@@ -101,7 +81,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                                 placeholder="Enter a username" 
                             />
                         </Form.Group>
-                        {/* <Form.Group className="mb-3">
+                        <Form.Group className="mb-3">
                             <Form.Label>Password: </Form.Label>
                             <Form.Control
                                 type="password"
@@ -111,7 +91,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                                 minLength="8"
                                 placeholder="Password must be 8 or more characters" 
                             />
-                        </Form.Group> */}
+                        </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>E-mail: </Form.Label>
                             <Form.Control
