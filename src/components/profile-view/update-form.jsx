@@ -144,6 +144,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                 >
                     Delete Account
                 </Button>
+
             </Card>
         </Container>
     )
