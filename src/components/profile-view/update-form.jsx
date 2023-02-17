@@ -1,36 +1,27 @@
 import React from "react";
 import { useState } from "react";
 import { Form, Button, Card, Container } from "react-bootstrap";
-import moment from "moment";
 
 export const UpdateForm =({ storedToken, storedUser}) => {
-
     const [token, setToken] = useState(storedToken ? storedToken : null);
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [username, setUsername] = useState(user.Username);
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState(user.Password);
     const [email, setEmail] = useState(user.Email);
-    const [birthday, setBirthday] = useState(moment(user.Birthday).format("YYYY-MM-DD"));
+    const [birthday, setBirthday] = useState(user.Birthday);
 
     const updateUser = (username) => {
-        const formData = {
-            Username: username,
-            Password: password,
-            Email: email,
-            Birthday: birthday
-        }
-        fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
+        fetch(`https://movieapi-dcj2.onrender.com/${username}`, {
             method: "PUT",
             headers: { Authorization: `Bearer ${token}`},
-            body: JSON.stringify(formData)
+            body: formData
         }).then(response => response.json())
         .then((updatedUser) => {
             console.log("Success: ", updatedUser);
             if (updatedUser) {
                 setUser(updatedUser);
-                window.alert('User info updated successfully')
-                localStorage.setItem('user', JSON.stringify(updatedUser))
-                window.location.reload()
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                window.location.reload();
             }
         })
         .catch((error) => {
@@ -39,8 +30,35 @@ export const UpdateForm =({ storedToken, storedUser}) => {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault(event);
-        updateUser(storedUser.Username)
+        event.preventDefault();
+        const data = {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday
+        };
+        fetch(
+            `https://movieapi-dcj2.onrender.com/${storedUser.Username}`,
+            {
+                method: "PUT",
+                body: JSON.stringify(data),
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+        .then((response) => {
+            if (response.ok) {
+                alert("Changes saved");
+                updateUser(username);
+            } else {
+                alert("Something went wrong");
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     };
 
     const handleDeleteUser = (username) => {
@@ -50,7 +68,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                 Authorization: `Bearer ${token}`,
                 "Content-Type" : application/json
             },
-            
+
         }).then(response => {
             if(response.ok) {
                 alert("User was successfully deleted");
@@ -62,13 +80,12 @@ export const UpdateForm =({ storedToken, storedUser}) => {
         });    
     };
 
-
     return (
         <Container>
             <Card className="mb-4 mt-4 ml-4 mr-4" bg="light">
-                <Card.Body>
-                    <Card.Title className="mb-4 mt-1 ml-4 mr-4 fw-bolder">
-                        Update Your Info
+            <Card.Body>
+                    <Card.Title className="mb-4 mt-1 ml-4 mr-4">
+                        Update Info
                     </Card.Title>
                     <Form className="profile-form mb-4 ml-4 mr-4" onSubmit={(e) => handleSubmit(e)}>
                         <Form.Group className="mb-3">
@@ -91,7 +108,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                                 minLength="8"
                                 placeholder="Password must be 8 or more characters" 
                             />
-                        </Form.Group>
+                        </Form.Group> 
                         <Form.Group className="mb-3">
                             <Form.Label>E-mail: </Form.Label>
                             <Form.Control
@@ -118,7 +135,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                     </Form>
 
                 </Card.Body>
-                
+
                 <Button 
                     onClick={() => handleDeleteUser(user._id)}
                     className="button-delete mt-3"
