@@ -53135,7 +53135,8 @@ var LoginView = function LoginView(_ref) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card.Body, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
     onSubmit: handleSubmit
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formLoginUsername"
+    controlId: "formLoginUsername",
+    className: "mb-2"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Username:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
     placeholder: "Enter your username",
     type: "text",
@@ -53146,7 +53147,8 @@ var LoginView = function LoginView(_ref) {
     minLength: "3",
     required: true
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formLoginPassword"
+    controlId: "formLoginPassword",
+    className: "mb-4"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Password:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
     placeholder: "Enter your password",
     type: "password",
@@ -53234,7 +53236,8 @@ var SignupView = function SignupView() {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
     onSubmit: handleSubmit
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formSignUpUsername"
+    controlId: "formSignUpUsername",
+    className: "formGroup mb-2"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Username:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
     placeholder: "Enter a username",
     type: "text",
@@ -53247,7 +53250,8 @@ var SignupView = function SignupView() {
   }), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Text, {
     className: "text-muted"
   }, "min. 5 characters")), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formSignupPassword"
+    controlId: "formSignupPassword",
+    className: "formGroup  mb-2"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Password:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
     placeholder: "Enter a password",
     type: "password",
@@ -53257,7 +53261,8 @@ var SignupView = function SignupView() {
     },
     required: true
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formSignupEmail"
+    controlId: "formSignupEmail",
+    className: "formGroup  mb-2"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Email:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
     placeholder: "Enter your email adress",
     type: "email",
@@ -53267,7 +53272,8 @@ var SignupView = function SignupView() {
     },
     required: true
   })), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
-    controlId: "formSignupBirthday"
+    controlId: "formSignupBirthday",
+    className: "formGroup  mb-4"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
     type: "date",
     value: birthday,
