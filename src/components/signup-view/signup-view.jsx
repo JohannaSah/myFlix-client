@@ -58,7 +58,7 @@ export const SignupView = () => {
                                         minLength="3"
                                     />
                                     <Form.Text className="text-muted">
-                                        min. 3 characters
+                                        min. 5 characters
                                     </Form.Text>
                                 </Form.Group>
 
