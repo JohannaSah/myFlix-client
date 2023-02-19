@@ -6,63 +6,45 @@ export const UpdateForm =({ storedToken, storedUser}) => {
     const [token, setToken] = useState(storedToken ? storedToken : null);
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [username, setUsername] = useState(user.Username);
-    const [password, setPassword] = useState(user.Password);
+    const [password, setPassword] = useState("");
     const [email, setEmail] = useState(user.Email);
     const [birthday, setBirthday] = useState(user.Birthday);
 
-    const updateUser = (username) => {
-        fetch(`https://movieapi-dcj2.onrender.com/${username}`, {
-            method: "PUT",
-            headers: { Authorization: `Bearer ${token}`},
-            body: formData
-        }).then(response => response.json())
-        .then((updatedUser) => {
-            console.log("Success: ", updatedUser);
-            if (updatedUser) {
-                setUser(updatedUser);
-                localStorage.setItem("user", JSON.stringify(updatedUser));
-                window.location.reload();
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = {
+    const updateUser = username => {
+        const formData = {
             Username: username,
             Password: password,
             Email: email,
             Birthday: birthday
-        };
-        fetch(
-            `https://movieapi-dcj2.onrender.com/${storedUser.Username}`,
-            {
-                method: "PUT",
-                body: JSON.stringify(data),
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            }
-        )
-        .then((response) => {
-            if (response.ok) {
-                alert("Changes saved");
-                updateUser(username);
-            } else {
-                alert("Something went wrong");
-            }
+        }
+        fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
+            method: 'PUT',
+            headers: { Authorization: `Bearer ${token}` },
+            body: JSON.stringify(formData)
         })
-        .catch((error) => {
-            console.log(error);
-        });
-    };
+        .then(response => response.json())
+        .then(updatedUser => {
+        console.log('Success: ', updatedUser)
+        if (updatedUser) {
+            setUser(updatedUser)
+            window.alert('User info updated successfully')
+            localStorage.setItem('user', JSON.stringify(updatedUser))
+            window.location.reload()
+        }
+        })
+        .catch(error => {
+        console.log(error)
+        window.alert(JSON.stringify(error?.message))
+        })
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    updateUser(storedUser.Username)
+}
 
     const handleDeleteUser = (username) => {
-        fetch(`https://movieapi-dcj2.onrender.com/${username}`, {
+        fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
             method: "DELETE",
             headers: { 
                 Authorization: `Bearer ${token}`,
