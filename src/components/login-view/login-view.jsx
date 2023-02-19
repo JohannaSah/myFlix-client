@@ -14,7 +14,7 @@ export const LoginView = ({onLoggedIn}) => {
             Password: password
         };
 
-        fetch("https://movieapi-dcj2.onrender.com/login", {
+        fetch(`https://movieapi-dcj2.onrender.com/login`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
