@@ -53358,7 +53358,7 @@ var UpdateForm = function UpdateForm(_ref) {
     _useState6 = _slicedToArray(_useState5, 2),
     username = _useState6[0],
     setUsername = _useState6[1];
-  var _useState7 = (0, _react.useState)(user.Password),
+  var _useState7 = (0, _react.useState)(""),
     _useState8 = _slicedToArray(_useState7, 2),
     password = _useState8[0],
     setPassword = _useState8[1];
@@ -53371,53 +53371,39 @@ var UpdateForm = function UpdateForm(_ref) {
     birthday = _useState12[0],
     setBirthday = _useState12[1];
   var updateUser = function updateUser(username) {
-    fetch("https://movieapi-dcj2.onrender.com/".concat(username), {
-      method: "PUT",
-      headers: {
-        Authorization: "Bearer ".concat(token)
-      },
-      body: formData
-    }).then(function (response) {
-      return response.json();
-    }).then(function (updatedUser) {
-      console.log("Success: ", updatedUser);
-      if (updatedUser) {
-        setUser(updatedUser);
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        window.location.reload();
-      }
-    }).catch(function (error) {
-      console.log(error);
-    });
-  };
-  var handleSubmit = function handleSubmit(event) {
-    event.preventDefault();
-    var data = {
+    var formData = {
       Username: username,
       Password: password,
       Email: email,
       Birthday: birthday
     };
-    fetch("https://movieapi-dcj2.onrender.com/".concat(storedUser.Username), {
-      method: "PUT",
-      body: JSON.stringify(data),
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username), {
+      method: 'PUT',
       headers: {
-        Authorization: "Bearer ".concat(token),
-        'Content-Type': 'application/json'
-      }
+        Authorization: "Bearer ".concat(token)
+      },
+      body: JSON.stringify(formData)
     }).then(function (response) {
-      if (response.ok) {
-        alert("Changes saved");
-        updateUser(username);
-      } else {
-        alert("Something went wrong");
+      return response.json();
+    }).then(function (updatedUser) {
+      console.log('Success: ', updatedUser);
+      if (updatedUser) {
+        setUser(updatedUser);
+        window.alert('User info updated successfully');
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        window.location.reload();
       }
     }).catch(function (error) {
       console.log(error);
+      window.alert(JSON.stringify(error === null || error === void 0 ? void 0 : error.message));
     });
   };
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    updateUser(storedUser.Username);
+  };
   var handleDeleteUser = function handleDeleteUser(username) {
-    fetch("https://movieapi-dcj2.onrender.com/".concat(username), {
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username), {
       method: "DELETE",
       headers: {
         Authorization: "Bearer ".concat(token),
@@ -59522,7 +59508,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58623" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59031" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
