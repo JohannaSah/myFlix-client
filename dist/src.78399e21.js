@@ -53115,7 +53115,7 @@ var LoginView = function LoginView(_ref) {
         localStorage.setItem("token", data.token);
         onLoggedIn(data.user, data.token);
       } else {
-        alert("No such user");
+        alert("Username or password is wrong");
       }
     }).catch(function (e) {
       console.log(e, "error");
@@ -53377,36 +53377,50 @@ var UpdateForm = function UpdateForm(_ref) {
     birthday = _useState12[0],
     setBirthday = _useState12[1];
   var updateUser = function updateUser(username) {
-    var formData = {
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username), {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer ".concat(token)
+      },
+      body: formData
+    }).then(function (response) {
+      return response.json();
+    }).then(function (updatedUser) {
+      console.log("Success: ", updatedUser);
+      if (updatedUser) {
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        window.location.reload();
+      }
+    }).catch(function (error) {
+      console.log(error);
+    });
+  };
+  var handleSubmit = function handleSubmit(event) {
+    event.preventDefault();
+    var data = {
       Username: username,
       Password: password,
       Email: email,
       Birthday: birthday
     };
-    fetch("https://movieapi-dcj2.onrender.com/users/".concat(username), {
-      method: 'PUT',
+    fetch("https://movieapi-dcj2.onrender.com/users/".concat(storedUser.Username), {
+      method: "PUT",
+      body: JSON.stringify(data),
       headers: {
-        Authorization: "Bearer ".concat(token)
-      },
-      body: JSON.stringify(formData)
+        Authorization: "Bearer ".concat(token),
+        'Content-Type': 'application/json'
+      }
     }).then(function (response) {
-      return response.json();
-    }).then(function (updatedUser) {
-      console.log('Success: ', updatedUser);
-      if (updatedUser) {
-        setUser(updatedUser);
-        window.alert('User info updated successfully');
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        window.location.reload();
+      if (response.ok) {
+        alert("Changes saved");
+        updateUser(username);
+      } else {
+        alert("Something went wrong");
       }
     }).catch(function (error) {
       console.log(error);
-      window.alert(JSON.stringify(error === null || error === void 0 ? void 0 : error.message));
     });
-  };
-  var handleSubmit = function handleSubmit(event) {
-    event.preventDefault();
-    updateUser(storedUser.Username);
   };
   var handleDeleteUser = function handleDeleteUser(username) {
     fetch("https://movieapi-dcj2.onrender.com/users/".concat(username), {
@@ -59514,7 +59528,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59031" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60828" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

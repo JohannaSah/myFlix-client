@@ -10,38 +10,56 @@ export const UpdateForm =({ storedToken, storedUser}) => {
     const [email, setEmail] = useState(user.Email);
     const [birthday, setBirthday] = useState(user.Birthday);
 
-    const updateUser = username => {
-        const formData = {
+    const updateUser = (username) => {
+        fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
+            method: "PUT",
+            headers: { Authorization: `Bearer ${token}`},
+            body: formData
+        }).then(response => response.json())
+        .then((updatedUser) => {
+            console.log("Success: ", updatedUser);
+            if (updatedUser) {
+                setUser(updatedUser);
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                window.location.reload();
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = {
             Username: username,
             Password: password,
             Email: email,
             Birthday: birthday
-        }
-        fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
-            method: 'PUT',
-            headers: { Authorization: `Bearer ${token}` },
-            body: JSON.stringify(formData)
+        };
+        fetch(
+            `https://movieapi-dcj2.onrender.com/users/${storedUser.Username}`,
+            {
+                method: "PUT",
+                body: JSON.stringify(data),
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+        .then((response) => {
+            if (response.ok) {
+                alert("Changes saved");
+                updateUser(username);
+            } else {
+                alert("Something went wrong");
+            }
         })
-        .then(response => response.json())
-        .then(updatedUser => {
-        console.log('Success: ', updatedUser)
-        if (updatedUser) {
-            setUser(updatedUser)
-            window.alert('User info updated successfully')
-            localStorage.setItem('user', JSON.stringify(updatedUser))
-            window.location.reload()
-        }
-        })
-        .catch(error => {
-        console.log(error)
-        window.alert(JSON.stringify(error?.message))
-        })
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    updateUser(storedUser.Username)
-}
+        .catch((error) => {
+            console.log(error);
+        });
+    };
 
     const handleDeleteUser = (username) => {
         fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
