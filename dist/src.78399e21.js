@@ -53246,7 +53246,7 @@ var SignupView = function SignupView() {
     minLength: "3"
   }), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Text, {
     className: "text-muted"
-  }, "min. 3 characters")), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
+  }, "min. 5 characters")), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formSignupPassword"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Label, null, "Password:"), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form.Control, {
     placeholder: "Enter a password",
@@ -59522,7 +59522,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53838" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58623" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
