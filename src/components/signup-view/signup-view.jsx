@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Col, Row, Card, CardGroup, Container } from "react-bootstrap";
 
-
 export const SignupView = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -44,7 +43,8 @@ export const SignupView = () => {
                         <Card className='border-0'>
                             <Form onSubmit={handleSubmit}>
                                 <Form.Group
-                                    controlId="formSignUpUsername"
+                                    controlId="formSignUpUsername" 
+                                    className="formGroup mb-2"                                   
                                 >
                                     <Form.Label>
                                         Username:
@@ -64,6 +64,7 @@ export const SignupView = () => {
 
                                 <Form.Group
                                     controlId="formSignupPassword"
+                                    className="formGroup  mb-2"  
                                 >
                                     <Form.Label>
                                         Password:
@@ -79,6 +80,7 @@ export const SignupView = () => {
 
                                 <Form.Group
                                     controlId="formSignupEmail"
+                                    className="formGroup  mb-2"  
                                 >
                                     <Form.Label>
                                         Email:
@@ -94,6 +96,7 @@ export const SignupView = () => {
 
                                 <Form.Group
                                     controlId="formSignupBirthday"
+                                    className="formGroup  mb-4"  
                                 >
                                     <Form.Label>
                                         Birthday:
@@ -106,7 +109,10 @@ export const SignupView = () => {
                                     />
                                 </Form.Group>
 
-                                <Button type="submit" variant="primary"> 
+                                <Button 
+                                    type="submit" 
+                                    variant="primary"
+                                > 
                                     Submit
                                 </Button>
                             </Form>
