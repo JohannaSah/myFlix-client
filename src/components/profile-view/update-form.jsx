@@ -11,24 +11,35 @@ export const UpdateForm =({ storedToken, storedUser}) => {
     const [email, setEmail] = useState(user.Email);
     const [birthday, setBirthday] = useState(user.Birthday);
 
-    const updateUser = (username) => {
+    const updateUser = username => {
+        const formData = {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday
+        }
+        console.log(formData, 'formData')
         fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
-            method: "PUT",
-            headers: { Authorization: `Bearer ${token}`},
-            body: formData
-        }).then(response => response.json())
-        .then((response) => {
-            console.log("Success: ", response);
-            if (response) {
-                setUser(response);
-                localStorage.setItem("user", JSON.stringify(response));
-                window.location.reload();
-            }
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
         })
-        .catch((error) => {
-            console.log(error);
-        });
-    };
+          .then(response => response.json())
+          .then(response => {
+            console.log('Success: ', response)
+    
+            console.log(response, 'response')
+            setUser(response)
+            localStorage.setItem('user', JSON.stringify(response))
+            window.location.reload()
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      };
 
     const handleSubmit = (event) => {
         event.preventDefault();
