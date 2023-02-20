@@ -27,7 +27,7 @@ export const UserInfo = ({user}) => {
                     <Row className="mb-4 ml-4 mr-43">
                         <Col>
                             <span>Birthday: </span>
-                            <span className="fw-bolder">{moment(user.Birthday).format("YYYY-MM-DD")}</span>
+                            <span className="fw-bolder">{moment(user.Birthday).format("DD-MM-YYYY")}</span>
                         </Col>
                     </Row>
                 </Card.Body>
