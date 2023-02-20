@@ -53205,7 +53205,15 @@ var SignupView = function SignupView() {
       }
     });
   };
-  return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.CardGroup, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
+  return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Container, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
+    className: "justify-content-md-center"
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, {
+    md: 4
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "mt-5 text-center text-muted"
+  }, "Sign up for"), /*#__PURE__*/_react.default.createElement("h1", {
+    className: "text-left font-weight-bold"
+  }, "MyFlix"))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Col, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.CardGroup, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Card, {
     className: "border-0"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Form, {
     onSubmit: handleSubmit

@@ -37,6 +37,12 @@ export const SignupView = () => {
 
     return (
         <Container>
+            <Row className='justify-content-md-center'>
+                <Col md={4}>
+                    <div className='mt-5 text-center text-muted'>Sign up for</div>
+                    <h1 className='text-left font-weight-bold'>MyFlix</h1>
+                </Col>
+            </Row>
             <Row>
                 <Col>
                     <CardGroup>
