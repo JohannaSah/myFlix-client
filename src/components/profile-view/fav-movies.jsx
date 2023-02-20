@@ -4,7 +4,6 @@ import { MovieCard } from '../movie-card/movie-card';
 
 export const FavMovies = ({ movies, storedUser }) => {
     const [user, setUser] = useState(storedUser ? storedUser : null);
-    console.log(user, movies);
     let favoriteMovies = movies.filter((movie) => 
         user.FavoriteMovies && user.FavoriteMovies.includes(movie._id)
     );
