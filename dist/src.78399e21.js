@@ -59042,21 +59042,28 @@ var UpdateForm = function UpdateForm(_ref) {
     birthday = _useState12[0],
     setBirthday = _useState12[1];
   var updateUser = function updateUser(username) {
+    var formData = {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    };
+    console.log(formData, 'formData');
     fetch("https://movieapi-dcj2.onrender.com/users/".concat(username), {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        Authorization: "Bearer ".concat(token)
+        Authorization: "Bearer ".concat(token),
+        'Content-Type': 'application/json'
       },
-      body: formData
+      body: JSON.stringify(formData)
     }).then(function (response) {
       return response.json();
     }).then(function (response) {
-      console.log("Success: ", response);
-      if (response) {
-        setUser(response);
-        localStorage.setItem("user", JSON.stringify(response));
-        window.location.reload();
-      }
+      console.log('Success: ', response);
+      console.log(response, 'response');
+      setUser(response);
+      localStorage.setItem('user', JSON.stringify(response));
+      window.location.reload();
     }).catch(function (error) {
       console.log(error);
     });
@@ -59502,7 +59509,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52157" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53137" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
