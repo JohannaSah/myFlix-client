@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from 'react-router';
 import { Button, Row, Col, Card, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { MovieCard } from "../movie-card/movie-card";
 
 export const MovieView = ({movies, username, FavoriteMovies}) => {     
@@ -11,8 +10,6 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     const movie = movies.find((movie) => movie.Title === Title ); 
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem('token');
-    const [movieExists, setMovieExists] = useState(false);
-    const [disableRemove, setDisableRemove] = useState(true);
     const [userFavoriteMovies, setUserFavoriteMovies] = useState(storedUser.FavoriteMovies ? storedUser.FavoriteMovies: FavoriteMovies);
 
     let similarMovies = movies.filter(
@@ -31,11 +28,10 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         })
         .then(res => res.json())
         .then(response => {
-            console.log(storedToken);
-            setUserFavoriteMovies(response.FavoriteMovies)
+            setUserFavoriteMovies(response.FavoriteMovies || userFavoriteMovies)
             if (response) {
                 alert("Movie added to Favorites!");
-                localStorage.setItem("user", JSON.stringify (response))
+                localStorage.setItem("user", JSON.stringify (response));
                 window.location.reload();
             } else {
                 alert("Something went wrong");
@@ -65,29 +61,10 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         });
     };
 
-    const movieAdded = (_id) => {
-        const hasMovie = userFavoriteMovies.includes((m) => m._id === _id);
-
-        if (hasMovie) {
-            setMovieExists(true)
-        }
+    const isFavorite = () => {
+        return userFavoriteMovies.some((i) => i === movie._id);
     };
 
-    const movieRemoved = (_id) => {
-        const hasMovie = userFavoriteMovies.some((m) => m._id === _id);
-
-        if (hasMovie) {
-            setDisableRemove(false)
-        }
-    };
-
-    console.log("movieExists", movieExists)
-
-    useEffect (() => {
-        movieAdded();
-        movieRemoved()
-    },[])
-    
     return (
         <Container>
             {movies.length === 0 ? (
@@ -132,7 +109,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                     <Button
                                         className="button-add-favorite"
                                         onClick={() => addFavoriteMovies(movie._id)}
-                                        disabled={movieExists}
+                                        disabled={isFavorite(movie._id)}
                                     >
                                         Add to Favorites
                                     </Button>
@@ -141,7 +118,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                     <Button
                                         variant="primary"
                                         onClick={() => removeFavoriteMovie(movie._id)}
-                                        disabled={disableRemove}
+                                        disabled={isFavorite(movie._id) == false}
                                     >
                                         Remove from Favorites
                                     </Button>
