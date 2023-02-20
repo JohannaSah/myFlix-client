@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Form, Button, Card, Container } from "react-bootstrap";
+import moment from "moment";
 
 export const UpdateForm =({ storedToken, storedUser}) => {
     const [token, setToken] = useState(storedToken ? storedToken : null);
@@ -16,11 +17,11 @@ export const UpdateForm =({ storedToken, storedUser}) => {
             headers: { Authorization: `Bearer ${token}`},
             body: formData
         }).then(response => response.json())
-        .then((updatedUser) => {
-            console.log("Success: ", updatedUser);
-            if (updatedUser) {
-                setUser(updatedUser);
-                localStorage.setItem("user", JSON.stringify(updatedUser));
+        .then((response) => {
+            console.log("Success: ", response);
+            if (response) {
+                setUser(response);
+                localStorage.setItem("user", JSON.stringify(response));
                 window.location.reload();
             }
         })
@@ -123,13 +124,13 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                             <Form.Label>Birthday: </Form.Label>
                             <Form.Control
                                 type="date"
-                                value={birthday}
+                                value={moment(birthday).format("YYYY-MM-DD")}
                                 onChange={e => setBirthday(e.target.value)}
                                 required
                                 placeholder="Enter your email address" 
                             />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" >
                             Save Changes
                         </Button>                    
                     </Form>
