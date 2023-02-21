@@ -1,37 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Button, Card} from "react-bootstrap";
+import {Button, Card, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-export const MovieCard = ({movie, onMovieClick}) => {
+export const MovieCard = ({movie}) => {
         return (
             <Card
-                className="h-100"
-                onClick={() => {
-                    onMovieClick(movie);
-                }}
+                className="h-100 movieCard"
+
             >
-                <Card.Img variant="top" src={movie.imageUrl}/> 
+                <Row className='mb-4'>
+                    <Col 
+                        className='text-center mt-3'
+                    >
+                    <Card.Img 
+                        variant="top" 
+                        src={movie.imageUrl}
+                        className='img-fluid h-100 w-auto movie-card-img'
+                    />
+                    </Col>
+                </Row>
                 <Card.Body>
+                    
                     <Card.Title>
                         {movie.Title}
                     </Card.Title>
                     <Card.Text>
                         {movie.Description}
                     </Card.Text>
-                    <Card.Text>
-                        Director: {movie.Director.Name}
-                    </Card.Text>
-                    <Card.Text>
-                        Genre: {movie.Genre.Name}
-                    </Card.Text>
-                    <Button
-                        onClick={() => {
-                            onMovieClick(movie);
-                        }}
-                        variant="link"
-                    >
-                        Open
-                    </Button>
+                    <Row className='d-flex flex-row justify-content-between align-items-baseline mt-auto'>
+                        <Link to={`/movies/${encodeURIComponent(movie.Title)}`}>
+                            <Button
+                                variant="link"
+                            >
+                                Details
+                            </Button>
+                        </Link>
+                    </Row>
                 </Card.Body>
             </Card>
         );
@@ -49,5 +54,4 @@ MovieCard.propTypes = {
             Name: PropTypes.string
         })
     }).isRequired,
-    onMovieClick: PropTypes.func.isRequired
 };

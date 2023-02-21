@@ -18,16 +18,20 @@
   "homepage": "https://github.com/JohannaSah/myFlix-client#readme",
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "re": "^0.1.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
+    "react-router": "^6.8.1",
+    "react-router-dom": "^6.8.1",
     "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.3",
     "node-sass": "^8.0.0",
+    "parcel": "^2.8.3",
     "parcel-bundler": "^1.12.5",
     "process": "^0.11.10"
   }
