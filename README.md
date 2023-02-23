@@ -23,9 +23,9 @@ Why — Movie enthusiasts should be able to access information about different m
 ## Features
 
 - Return a list of ALL movies to the user
-- Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
-- Return data about a genre (description) by name/title (e.g., “Thriller”)
-- Return data about a director (bio, birth year, death year) by name
+- Return data (description, genre, director, image URL) about a single movie by title to the user
+<!-- - Return data about a genre (description) by name/title (e.g., “Thriller”)
+- Return data about a director (bio, birth year, death year) by name -->
 - Allow new users to register
 - Allow users to update their user info (username, password, email, date of birth)
 - Allow users to add a movie to their list of favorites
@@ -44,27 +44,20 @@ Ability to select a movie for more details
 - Single movie view
 
 Returns data (description, genre, director, image) about a single movie to the user
-Allows users to add a movie to their list of favorites
+Allows users to add a movie to or remove a movie from their list of favorites
+Displays a list of similar movies (movies with the same genre)
 
 - Login view
 
 Allows users to log in with a username and password
-Registration view
+
+- Registration view
+
 Allows new users to register (username, password, email, birthday)
-
-- Genre view
-
-Returns data about a genre, with a name and description
-Displays example movies
-
-- Director view
-
-Returns data about a director (name, bio, birth year, death year)
-Displays example movies
 
 - Profile view
 
 Allows users to update their user info (username, password, email, date of birth)
 Allows existing users to deregister
 Displays favorite movies
-Allows users to remove a movie from their list of favorites
+
