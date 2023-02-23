@@ -30,7 +30,7 @@ export const LoginView = ({onLoggedIn}) => {
                     onLoggedIn(data.user, data.token);
                 }
                 else {
-                    alert("Username or password is wrong");
+                    alert("Username does not exist or password is wrong");
                 }
             })
             .catch((e) => {
