@@ -28,7 +28,7 @@ export const MovieCard = ({movie}) => {
                     <Card.Text>
                         {movie.Description}
                     </Card.Text>
-                    <Row className='d-flex flex-row justify-content-between align-items-baseline mt-auto'>
+                    <Row>
                         <Link to={`/movies/${encodeURIComponent(movie.Title)}`}>
                             <Button
                                 variant="link"
