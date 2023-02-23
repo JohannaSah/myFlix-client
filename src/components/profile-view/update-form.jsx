@@ -18,7 +18,6 @@ export const UpdateForm =({ storedToken, storedUser}) => {
           Email: email,
           Birthday: birthday
         }
-        console.log(formData, 'formData')
         fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
           method: 'PUT',
           headers: {
@@ -74,13 +73,18 @@ export const UpdateForm =({ storedToken, storedUser}) => {
     };
 
     const handleDeleteUser = (username) => {
-        fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
+        const userWarning = confirm(
+            `Are you sure? This action is permanent, if you delete your account it cannot be removed. Proceed?`
+        );
+
+        userWarning === false
+            ? alert('Thank you for continuing to use myFlix')
+        : fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
             method: "DELETE",
             headers: { 
                 Authorization: `Bearer ${token}`,
-                "Content-Type" : application/json
+                'Content-Type' : 'application/json'
             },
-
         }).then(response => {
             if(response.ok) {
                 alert("User was successfully deleted");
@@ -149,7 +153,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                 </Card.Body>
 
                 <Button 
-                    onClick={() => handleDeleteUser(user._id)}
+                    onClick={() => handleDeleteUser(user.Username)}
                     className="button-delete mt-3"
                     type="submit"
                     variant="danger"
