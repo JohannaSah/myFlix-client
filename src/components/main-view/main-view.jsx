@@ -5,7 +5,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
@@ -15,6 +15,8 @@ export const MainView = () => {
     const [user, setUser] = useState(storedUser? storedUser : null);
     const [token, setToken] = useState(storedToken? storedToken: null);
     const [FavoriteMovies] = useState([]);
+    const [searchedInfo, setSearchedInfo] = useState("");
+    const [filteredMovies, setFilteredMovies] = useState([]);
 
     useEffect(() => {
       if (!token) {
@@ -28,6 +30,20 @@ export const MainView = () => {
         setMovies(movies);
       });
     }, [token]);
+
+    useEffect(() => {
+      if (searchedInfo && searchedInfo.length > 0) {
+        const searchedMovies = movies.filter( m => (
+          m.Title.toLowerCase().includes(searchedInfo.toLowerCase().trim()) ||
+          m.Genre.Name.toLowerCase().includes(searchedInfo.toLowerCase().trim()) ||
+          m.Director.Name.toLowerCase().includes(searchedInfo.toLowerCase().trim())
+        ));
+        setFilteredMovies(searchedMovies);
+      }
+      else {
+        setFilteredMovies([]);
+      }
+    }, [searchedInfo])
 
     return (
       <BrowserRouter>
@@ -122,6 +138,19 @@ export const MainView = () => {
               path="/"
               element={
                 <>
+                  <Row className="mb-4">
+                    <Col>
+                      <Form>
+                        <Form.Control 
+                          type="text"
+                          placeholder="Search by Title, Genre, or Director"
+                          value={searchedInfo}
+                          onChange={e => setSearchedInfo(e.target.value)}
+                          className="bg-light"
+                        />
+                      </Form>
+                    </Col>
+                  </Row>
                   {!user ? (
                       <Navigate to="/login" replace />
                     ) : (movies && movies.length === 0) ? (
@@ -130,11 +159,19 @@ export const MainView = () => {
                       </Col>
                     ) : (
                       <>
-                        {movies.map((movie) => (
-                          <Col className="mb-4" key={movie._id} md={3}>
-                            <MovieCard movie={movie} />
-                          </Col>
-                        ))}
+                        {filteredMovies && filteredMovies.length > 0 ? (
+                          filteredMovies.map((movie) =>
+                              <Col className="mb-4" key={movie.id} md={3}>
+                                  <MovieCard movie={movie} user={user}/>
+                              </Col>
+                          )
+                        ) : (
+                          movies.map((movie) => (
+                              <Col className="mb-4" key={movie.id} md={3}>
+                                  <MovieCard movie={movie} user={user}/>
+                              </Col>
+                          ))
+                        )}
                       </>
                     )
                   }
