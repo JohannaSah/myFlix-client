@@ -11,7 +11,7 @@ export const MovieCard = ({movie}) => {
             >
                 <Row className='mb-4'>
                     <Col 
-                        className='text-center mt-3'
+                        className='text-center'
                     >
                     <Card.Img 
                         variant="top" 
