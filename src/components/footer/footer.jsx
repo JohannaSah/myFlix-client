@@ -9,7 +9,12 @@ export const Footer = () => {
                     className="mb-4 text-center" 
                     style={{color: "whitesmoke", marginTop: "50px"}}
                 >
-                    Thanks for using myFlix
+                    Thanks for using myFlix 
+                    <br />
+                    Unfortunately it might take a little while to load
+                    <br />
+                    Thank you for for patience and understanding 
+
                 </Col>
             </Row>
         </Container>

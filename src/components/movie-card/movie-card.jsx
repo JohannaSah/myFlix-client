@@ -26,7 +26,7 @@ export const MovieCard = ({movie}) => {
                     </Row>
                     <Card.Body>
                         <Card.Title 
-                            className="movieCardTitle text-center" 
+                            className="movieCardTitle text-center mb-4" 
                             style={{color: "whitesmoke"}}
                         >
                             {movie.Title}
