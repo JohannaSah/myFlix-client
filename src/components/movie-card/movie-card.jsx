@@ -6,38 +6,30 @@ import { Link } from "react-router-dom";
 export const MovieCard = ({movie}) => {
         return (
             <Card
-                className="h-100 movieCard"
+                className="h-100 movieCard bg-light"
 
             >
-                <Row className='mb-4'>
-                    <Col 
-                        className='text-center'
-                    >
-                    <Card.Img 
-                        variant="top" 
-                        src={movie.imageUrl}
-                        className='img-fluid h-100 w-auto movie-card-img'
-                    />
-                    </Col>
-                </Row>
-                <Card.Body>
-                    
-                    <Card.Title>
-                        {movie.Title}
-                    </Card.Title>
-                    <Card.Text>
-                        {movie.Description}
-                    </Card.Text>
-                    <Row>
-                        <Link to={`/movies/${encodeURIComponent(movie.Title)}`}>
-                            <Button
-                                variant="link"
-                            >
-                                Details
-                            </Button>
-                        </Link>
+                <Link 
+                    to={`/movies/${encodeURIComponent(movie.Title)}`}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                >
+                    <Row className='mb-4'>
+                        <Col 
+                            className='text-center'
+                        >
+                        <Card.Img 
+                            variant="top" 
+                            src={movie.imageUrl}
+                            className='img-fluid w-100 h-auto movie-card-img'
+                        />
+                        </Col>
                     </Row>
-                </Card.Body>
+                    <Card.Body>
+                        <Card.Title className="movieCardTitle text-center">
+                            {movie.Title}
+                        </Card.Title>
+                    </Card.Body>
+                </Link>
             </Card>
         );
 };
