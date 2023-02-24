@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from 'react-router';
-import { Button, Row, Col, Card, Container } from "react-bootstrap";
+import { Button, Row, Col, Card, Container, Collapse } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 
 export const MovieView = ({movies, username, FavoriteMovies}) => {     
@@ -11,6 +11,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem('token');
     const [userFavoriteMovies, setUserFavoriteMovies] = useState(storedUser.FavoriteMovies ? storedUser.FavoriteMovies: FavoriteMovies);
+
 
     let similarMovies = movies.filter(
         ({ Genre: { Name }, Title }) =>
@@ -65,6 +66,9 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         return userFavoriteMovies.some((i) => i === movie._id);
     };
 
+    const [openDirector, setOpenDirector] = useState(false);
+    const [openGenre, setOpenGenre] = useState(false);
+
     return (
         <Container>
             {movies.length === 0 ? (
@@ -74,40 +78,61 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
             ) : (
                 <>
                     <Card 
-                        className="h-100 movieView mb-4"
+                        className="h-100 movieView mb-4 bg-dark border-1 border-light"
                     > 
-                        <Row className='h-100 mb-4 movieViewImage'>
+                        <Row className='mb-4'>
                             <Col 
-                                className='h-100 text-center mt-3'
+                                className='text-center'
                             >
-                                <Card.Img 
-                                    variant="top" 
-                                    src={movie.imageUrl}
-                                    className='img-fluid h-100 w-auto movie-card-img'
-                                />
+                            <Card.Img 
+                                variant="top" 
+                                src={movie.imageUrl}
+                                className='img-fluid w-100 h-auto movie-view-img'
+                            />
                             </Col>
                         </Row>
                         <Card.Body className="mb-4">
-                            <Card.Title className="mb-4 movieViewTitle">
-                                {movie.Title}
+                            <Card.Title 
+                                className="mb-4 text-center movieViewTitle" 
+                                style={{color: "whitesmoke"}}
+                            >
+                                <h1>{movie.Title}</h1>
                             </Card.Title>
-                            <Card.Text className="mb-4">
-                                <Row className="mb-4 movieViewDescription">
+                            <Card.Text className="mb-4" 
+                                style={{color: "whitesmoke"}}>
+                                <Row className="mb-4 movieViewDescription text-center">
                                     <Col>{movie.Description}</Col>
                                 </Row>
-                                <Row className="movieViewDirector">
-                                    <Col>Director: </Col>
-                                    <Col>{movie.Director.Name}</Col>
+                                <Row 
+                                    className="movieViewDirector text-center mb-2"
+                                    onClick={() => setOpenDirector(!openDirector)}
+                                >
+                                    <span>Director:</span> 
+                                    <span style={{textDecoration: "underline", cursor: "pointer"}}> 
+                                        {movie.Director.Name} 
+                                    </span>                                  
+                                    
+                                    <Collapse in={openDirector}>
+                                        <Col>{movie.Director.Bio}</Col>
+                                    </Collapse>                                    
                                 </Row>
-                                <Row className="mb-4 movieViewGenre">
-                                    <Col>Genre:</Col>
-                                    <Col>{movie.Genre.Name}</Col>
-                                </Row>
+                                <Row 
+                                    className="movieViewGenre text-center mb-2"
+                                    onClick={() => setOpenGenre(!openGenre)}
+                                >
+                                    <span>Genre:</span>
+                                    <span style={{textDecoration: "underline", cursor: "pointer"}}>
+                                        {movie.Genre.Name}
+                                    </span>
+                                    <Collapse in={openGenre}>
+                                        <Col>{movie.Genre.Description}</Col>
+                                    </Collapse>
+                                </Row>                                
                             </Card.Text>
-                            <Row className="mb-4 movieViewButtons">
+                            <Row className="mb-4 movieViewButtons text-center">
                                 <Col>
                                     <Button
-                                        className="button-add-favorite"
+                                        variant="outline-light"
                                         onClick={() => addFavoriteMovies(movie._id)}
                                         disabled={isFavorite(movie._id)}
                                     >
@@ -116,7 +141,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                 </Col>
                                 <Col>
                                     <Button
-                                        variant="primary"
+                                        variant="outline-light"
                                         onClick={() => removeFavoriteMovie(movie._id)}
                                         disabled={isFavorite(movie._id) == false}
                                     >
@@ -126,21 +151,24 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                             </Row>
                         </Card.Body>                          
                     </Card>
-                    <Card className="mb-4">
+                    <Card className="h-100 similarMovieView mb-4 bg-dark border-1 border-light">
                         <Card.Body>
-                            <Card.Title className='mb-4'>
-                                Similar Movies
+                        <Row>
+                            <Card.Title 
+                                className='text-center h4 mb-4 mt-4 fw-bolder' 
+                                style={{color: "whitesmoke"}}
+                            >
+                                <h1>Similar Movies</h1>
                             </Card.Title>
-                            <Card.Text>
                                 {similarMovies.map((movie) => (
-                                    <Col className='mb-4' key={movie.Title}>
+                                    <Col className='mb-4' key={movie.Title} md={4}>
                                         <MovieCard
                                             movie={movie}
                                         />
                                     </Col>
-                                ))}
-                            </Card.Text>
-                        </Card.Body>                        
+                                ))} 
+                        </Row>   
+                        </Card.Body>                 
                     </Card>
                 </>
             )}
