@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Row, Col, Form } from "react-bootstrap";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import ReactLoadingSkeleton from 'react-loading-skeleton';
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
@@ -6,8 +9,7 @@ import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { Footer } from "../footer/footer";
 import { ProfileView } from "../profile-view/profile-view";
-import { Row, Col, Form } from "react-bootstrap";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { MovieCardLoader } from "../loading-skeletons/movie-card-loader";
 
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -18,17 +20,20 @@ export const MainView = () => {
     const [FavoriteMovies] = useState([]);
     const [searchedInfo, setSearchedInfo] = useState("");
     const [filteredMovies, setFilteredMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
       if (!token) {
         return;
       }
+      setLoading(true);
       fetch("https://movieapi-dcj2.onrender.com/movies", {
         headers: { Authorization: `Bearer ${token}`}
       })
       .then((response) => response.json())
       .then((movies) => {
         setMovies(movies);
+        setLoading(false);
       });
     }, [token]);
 
@@ -98,21 +103,20 @@ export const MainView = () => {
               element={
                 <>
                   {!user ? (
-                      <Navigate to="/login" replace />
-                    ) : movies.length === 0 ? (
-                      <Col>
-                        The list is empty!
-                      </Col>
-                    ) : (
-                      <Col md={8}>
-                        <MovieView 
-                          movies={movies} 
-                          username={user.Username} 
-                          favoriteMovies={user.FavoriteMovies}
-                        />
-                      </Col>
-                    )
-                  }
+                  <Navigate to="/login" replace />
+                ) : loading ? (
+                  <MovieCardLoader/>
+                ) : movies.length === 0 ? (
+                  <Col>The list is empty!</Col>
+                ) : (
+                  <Col md={8}>
+                    <MovieView
+                      movies={movies}
+                      username={user.Username}
+                      favoriteMovies={user.FavoriteMovies}
+                    />
+                  </Col>
+                )}
                 </>
               }
             />
@@ -153,29 +157,34 @@ export const MainView = () => {
                     </Col>
                   </Row>
                   {!user ? (
-                      <Navigate to="/login" replace />
-                    ) : (movies && movies.length === 0) ? (
-                      <Col> 
-                        This list is empty! 
-                      </Col>
+                    <Navigate to="/login" replace />
                     ) : (
-                      <>
-                        {filteredMovies && filteredMovies.length > 0 ? (
-                          filteredMovies.map((movie) =>                            
-                            <Col className="mb-4" key={movie.id} md={4}>                              
-                                <MovieCard movie={movie} user={user}/>                               
-                            </Col>                                                         
-                          )
-                        ) : (
-                          movies.map((movie) => (                            
-                            <Col className="mb-4" key={movie.id} md={4}>                              
-                                <MovieCard movie={movie} user={user}/>                              
-                            </Col>                            
-                          ))
-                        )}
-                      </>
-                    )
-                  }
+                      loading ? (
+                        <Row>
+                          {[1,2,3,4,5,6].map((n) => (
+                            <Col className="mb-4" key={n} md={4}>
+                              <ReactLoadingSkeleton height={250} />
+                            </Col>
+                          ))}
+                        </Row>
+                      ) : (
+                        <>
+                          {filteredMovies && filteredMovies.length > 0 ? (
+                            filteredMovies.map((movie) =>                            
+                              <Col className="mb-4" key={movie.id} md={4}>                              
+                                  <MovieCard movie={movie} user={user}/>                               
+                              </Col>                                                         
+                            )
+                          ) : (
+                            movies.map((movie) => (                            
+                              <Col className="mb-4" key={movie.id} md={4}>                              
+                                  <MovieCard movie={movie} user={user}/>                              
+                              </Col>                            
+                            ))
+                          )}
+                        </>
+                      )
+                  )}
                 </>
               }
             />
