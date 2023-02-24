@@ -159,7 +159,7 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
                                 className='text-center h4 mb-4 mt-4 fw-bolder' 
                                 style={{color: "whitesmoke"}}
                             >
-                                <h1>Similar Movies</h1>
+                                <h1>Movies with the same genre</h1>
                             </Card.Title>
                                 {similarMovies.map((movie) => (
                                     <Col className='mb-4' key={movie.Title} md={4}>
