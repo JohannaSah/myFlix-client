@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Button, Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({movie}) => {
         return (
             <Card
-                className="h-100 movieCard bg-light"
+                className="h-100 movieCard bg-dark border-light"
 
             >
                 <Link 
@@ -25,7 +25,10 @@ export const MovieCard = ({movie}) => {
                         </Col>
                     </Row>
                     <Card.Body>
-                        <Card.Title className="movieCardTitle text-center">
+                        <Card.Title 
+                            className="movieCardTitle text-center" 
+                            style={{color: "whitesmoke"}}
+                        >
                             {movie.Title}
                         </Card.Title>
                     </Card.Body>
