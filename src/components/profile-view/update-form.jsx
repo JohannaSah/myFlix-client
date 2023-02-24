@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Form, Button, Card, Container } from "react-bootstrap";
+import { Form, Button, Card, Container, Row, Col } from "react-bootstrap";
 import moment from "moment";
 
 export const UpdateForm =({ storedToken, storedUser}) => {
@@ -101,66 +101,71 @@ export const UpdateForm =({ storedToken, storedUser}) => {
             <Card className="mb-4 mt-4 ml-4 mr-4" bg="light">
             <Card.Body>
                     <Card.Title className="mb-4 mt-1 ml-4 mr-4">
-                        Update Info
+                        <h1>User Info</h1>
                     </Card.Title>
-                    <Form className="profile-form mb-4 ml-4 mr-4" onSubmit={(e) => handleSubmit(e)}>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Username: </Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={username}
-                                onChange={e => setUsername(e.target.value)}
-                                required
-                                placeholder="Enter a username" 
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Password: </Form.Label>
-                            <Form.Control
-                                type="password"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                                required
-                                minLength="8"
-                                placeholder="Password must be 8 or more characters" 
-                            />
-                        </Form.Group> 
-                        <Form.Group className="mb-3">
-                            <Form.Label>E-mail: </Form.Label>
-                            <Form.Control
-                                type="email"
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
-                                required
-                                placeholder="Enter your email address" 
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Birthday: </Form.Label>
-                            <Form.Control
-                                type="date"
-                                value={moment(birthday).format("YYYY-MM-DD")}
-                                onChange={e => setBirthday(e.target.value)}
-                                required
-                                placeholder="Enter your email address" 
-                            />
-                        </Form.Group>
-                        <Button variant="primary" type="submit" >
-                            Save Changes
-                        </Button>                    
-                    </Form>
-
+                    <Card.Body>
+                        <Form className="profile-form mb-4 ml-4 mr-4" onSubmit={(e) => handleSubmit(e)}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Username: </Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    value={username}
+                                    onChange={e => setUsername(e.target.value)}
+                                    required
+                                    placeholder="Enter a username" 
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Password: </Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    required
+                                    minLength="8"
+                                    placeholder="Password must be 8 or more characters" 
+                                />
+                            </Form.Group> 
+                            <Form.Group className="mb-3">
+                                <Form.Label>E-mail: </Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    value={email}
+                                    onChange={e => setEmail(e.target.value)}
+                                    required
+                                    placeholder="Enter your email address" 
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Birthday: </Form.Label>
+                                <Form.Control
+                                    type="date"
+                                    value={moment(birthday).format("YYYY-MM-DD")}
+                                    onChange={e => setBirthday(e.target.value)}
+                                    required
+                                    placeholder="Enter your email address" 
+                                />
+                            </Form.Group>
+                            <Row>
+                                <Col md={3}>
+                                    <Button variant="dark" type="submit" >
+                                        Update Info
+                                    </Button>
+                                </Col>
+                                <Col md={3}>
+                                    <Button 
+                                        onClick={() => handleDeleteUser(user.Username)}
+                                        className="button-delete"
+                                        type="submit"
+                                        variant="danger"
+                                    >
+                                        Delete Account
+                                    </Button> 
+                                </Col>
+                            </Row>                                                              
+                        </Form>
+                    </Card.Body>
                 </Card.Body>
-
-                <Button 
-                    onClick={() => handleDeleteUser(user.Username)}
-                    className="button-delete mt-3"
-                    type="submit"
-                    variant="danger"
-                >
-                    Delete Account
-                </Button>
-
             </Card>
         </Container>
     )
