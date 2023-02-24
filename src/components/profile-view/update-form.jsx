@@ -136,7 +136,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
                                     placeholder="Enter your email address" 
                                 />
                             </Form.Group>
-                            <Form.Group className="mb-3">
+                            <Form.Group className="mb-5">
                                 <Form.Label>Birthday: </Form.Label>
                                 <Form.Control
                                     type="date"
