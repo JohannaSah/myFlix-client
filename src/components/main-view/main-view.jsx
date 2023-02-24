@@ -4,6 +4,7 @@ import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { Footer } from "../footer/footer";
 import { ProfileView } from "../profile-view/profile-view";
 import { Row, Col, Form } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -47,7 +48,7 @@ export const MainView = () => {
 
     return (
       <BrowserRouter>
-        <NavigationBar 
+        <NavigationBar
           user={user}
           onLoggedOut={() => {
             setUser(null);
@@ -55,7 +56,7 @@ export const MainView = () => {
             localStorage.clear();
           }}
         />
-        <Row className="justify-content-md-center">
+        <Row className="justify-content-md-center bg-dark">
           <Routes>
             <Route 
               path="/signup"
@@ -160,16 +161,16 @@ export const MainView = () => {
                     ) : (
                       <>
                         {filteredMovies && filteredMovies.length > 0 ? (
-                          filteredMovies.map((movie) =>
-                              <Col className="mb-4" key={movie.id} md={3}>
-                                  <MovieCard movie={movie} user={user}/>
-                              </Col>
+                          filteredMovies.map((movie) =>                            
+                            <Col className="mb-4" key={movie.id} md={4}>                              
+                                <MovieCard movie={movie} user={user}/>                               
+                            </Col>                                                         
                           )
                         ) : (
-                          movies.map((movie) => (
-                              <Col className="mb-4" key={movie.id} md={3}>
-                                  <MovieCard movie={movie} user={user}/>
-                              </Col>
+                          movies.map((movie) => (                            
+                            <Col className="mb-4" key={movie.id} md={4}>                              
+                                <MovieCard movie={movie} user={user}/>                              
+                            </Col>                            
                           ))
                         )}
                       </>
@@ -180,6 +181,7 @@ export const MainView = () => {
             />
           </Routes>
         </Row>
+        <Footer />
       </BrowserRouter>
     );
   };
