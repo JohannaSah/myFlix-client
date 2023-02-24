@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useParams } from 'react-router';
 import { Button, Row, Col, Card, Container, Collapse } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
+import { toast } from 'react-toastify';
 
 export const MovieView = ({movies, username, FavoriteMovies}) => {     
     
@@ -31,11 +32,11 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         .then(response => {
             setUserFavoriteMovies(response.FavoriteMovies || userFavoriteMovies)
             if (response) {
-                alert("Movie added to Favorites!");
+                toast.success("Movie added to Favorites!");
                 localStorage.setItem("user", JSON.stringify (response));
                 window.location.reload();
             } else {
-                alert("Something went wrong");
+                toast.error("Something went wrong");
             }
         });
     };
@@ -52,12 +53,12 @@ export const MovieView = ({movies, username, FavoriteMovies}) => {
         .then(res => res.json())
         .then(response => {
             if (response) {
-                alert("Movie removed from Favorites");
+                toast.success("Movie removed from Favorites");
                 localStorage.setItem("user", JSON.stringify (response))
                 window.location.reload();
 
             } else {
-                alert("Something went wrong");
+                toast.error("Something went wrong");
             }
         });
     };

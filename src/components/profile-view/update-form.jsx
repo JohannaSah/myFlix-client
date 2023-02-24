@@ -1,7 +1,7 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Card, Container, Row, Col } from "react-bootstrap";
 import moment from "moment";
+import { toast } from 'react-toastify';
 
 export const UpdateForm =({ storedToken, storedUser}) => {
     const [token, setToken] = useState(storedToken ? storedToken : null);
@@ -61,10 +61,10 @@ export const UpdateForm =({ storedToken, storedUser}) => {
         )
         .then((response) => {
             if (response.ok) {
-                alert("Changes saved");
+                toast.success("Changes saved");
                 updateUser(username);
             } else {
-                alert("Something went wrong");
+                toast.error("Something went wrong");
             }
         })
         .catch((error) => {
@@ -78,7 +78,7 @@ export const UpdateForm =({ storedToken, storedUser}) => {
         );
 
         userWarning === false
-            ? alert('Thank you for continuing to use myFlix')
+            ? toast.info('Thank you for continuing to use myFlix')
         : fetch(`https://movieapi-dcj2.onrender.com/users/${username}`, {
             method: "DELETE",
             headers: { 
@@ -87,11 +87,11 @@ export const UpdateForm =({ storedToken, storedUser}) => {
             },
         }).then(response => {
             if(response.ok) {
-                alert("User was successfully deleted");
+                toast.success("User was successfully deleted");
                 localStorage.clear();
                 window.location.reload();
             } else {
-                alert("User was not deleted");
+                toast.error("User was not deleted");
             }
         });    
     };

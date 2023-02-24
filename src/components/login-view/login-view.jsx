@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Form, Button, Card, CardGroup, Container, Col, Row } from "react-bootstrap";
+import { Form, Button, Card, Container, Col, Row } from "react-bootstrap";
+import { toast } from 'react-toastify';
 
 export const LoginView = ({onLoggedIn}) => {
     const [username, setUsername] = useState("");
@@ -30,12 +31,12 @@ export const LoginView = ({onLoggedIn}) => {
                     onLoggedIn(data.user, data.token);
                 }
                 else {
-                    alert("Username does not exist or password is wrong");
+                    toast.error("Username does not exist or password is wrong");
                 }
             })
             .catch((e) => {
                 console.log(e, "error");
-                alert("Something went wrong");
+                toast("Something went wrong");
             });
     };
 

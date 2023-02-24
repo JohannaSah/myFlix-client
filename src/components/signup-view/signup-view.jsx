@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Col, Row, Card, Container } from "react-bootstrap";
+import { toast } from 'react-toastify';
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
@@ -27,10 +28,10 @@ export const SignupView = () => {
             console.log(response)
             if (response.ok) {
                 console.log("Response is ok");
-                alert("Signup successfull");
+                toast.success("Signup successfull");
                 window.location.href = '../login';
             } else {
-                alert("Signup failed");
+                toast.error("Signup failed");
             }
         });
     };
