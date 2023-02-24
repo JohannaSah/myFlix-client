@@ -1,7 +1,7 @@
 import React from "react";
 import { UpdateForm } from "./update-form";
 import { FavMovies } from "./fav-movies";
-import { UserInfo } from "./user-info";
+
 
 export const ProfileView = ({ movies }) => {
     const storedToken = localStorage.getItem("token");
@@ -10,9 +10,8 @@ export const ProfileView = ({ movies }) => {
 
     return (
         <>
-        <UserInfo user={storedUser} />
-        <UpdateForm storedToken={storedToken} storedUser={storedUser} />
-        <FavMovies movies={movies} storedUser={storedUser} />
+            <UpdateForm storedToken={storedToken} storedUser={storedUser} />
+            <FavMovies movies={movies} storedUser={storedUser} />
         </>
     );
 };
