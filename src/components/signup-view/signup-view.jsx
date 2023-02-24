@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Col, Row, Card, CardGroup, Container } from "react-bootstrap";
+import { Form, Button, Col, Row, Card, Container } from "react-bootstrap";
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
@@ -38,15 +38,24 @@ export const SignupView = () => {
     return (
         <Container>
             <Row className='justify-content-md-center'>
-                <Col md={4}>
-                    <div className='mt-5 text-center text-muted'>Sign up for</div>
-                    <h1 className='text-left font-weight-bold'>MyFlix</h1>
+                <Col md={8}>
+                    <div 
+                        className='mt-5 text-center text-muted'
+                    >
+                        <h3>Sign up for</h3>
+                    </div>
+                    <h1 
+                        className='text-center font-weight-bold mb-4' 
+                        style={{color: "white"}}
+                    >
+                        MyFlix
+                    </h1>
                 </Col>
             </Row>
-            <Row>
-                <Col>
-                    <CardGroup>
-                        <Card className='border-0'>
+            <Row >
+                <Col>                    
+                    <Card className='border-0'> 
+                        <Card.Body className="mt-4">
                             <Form onSubmit={handleSubmit}>
                                 <Form.Group
                                     controlId="formSignUpUsername" 
@@ -117,13 +126,14 @@ export const SignupView = () => {
 
                                 <Button 
                                     type="submit" 
-                                    variant="primary"
+                                    variant="dark"
+                                    className="mb-4 "
                                 > 
                                     Submit
                                 </Button>
                             </Form>
-                        </Card>
-                    </CardGroup>
+                        </Card.Body>
+                    </Card>
                 </Col>
             </Row>
         </Container>  

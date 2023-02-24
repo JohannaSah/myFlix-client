@@ -1,19 +1,10 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
-$color: rgb(73,72,72);
-
-$body-bg: rgd(203,208,211);
-
-h1 {
-    font-size: $font-size-base * 3.5;
+body{
+    background-color: dark;
 }
-
-.movie-view-img {
-    max-height: 450px;
-}
-
- .movie-card-img {
-    max-height: 350px;
- }
 
  
+.Container{
+    height: 100%;
+}
